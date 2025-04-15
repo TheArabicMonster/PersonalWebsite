@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLanguage, type Language } from "../contexts/LanguageContext";
 import {
   DropdownMenu,
@@ -15,11 +15,18 @@ interface LanguageSelectorProps {
 }
 
 export default function LanguageSelector({ isMobile = false }: LanguageSelectorProps) {
+  // Utilisez useState pour suivre la langue actuelle dans le composant
+  const [currentLanguage, setCurrentLanguage] = useState<Language>("en");
   const { language, setLanguage } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const { toast } = useToast();
 
-  const displayLanguage = language.toUpperCase();
+  // Synchroniser l'état local avec le contexte
+  useEffect(() => {
+    setCurrentLanguage(language);
+  }, [language]);
+
+  const displayLanguage = currentLanguage.toUpperCase();
 
   const languages: { code: Language; label: string; flag: string }[] = [
     { code: "en", label: "English", flag: "🇬🇧" },
@@ -28,17 +35,37 @@ export default function LanguageSelector({ isMobile = false }: LanguageSelectorP
   ];
 
   const getCurrentLanguageInfo = () => {
-    return languages.find(lang => lang.code === language) || languages[0];
+    return languages.find(lang => lang.code === currentLanguage) || languages[0];
+  };
+
+  // Fonction pour appliquer directement le changement de langue
+  const applyLanguage = (lang: Language) => {
+    // Mettre à jour le document
+    document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+    document.documentElement.lang = lang;
+    
+    // Sauvegarder dans localStorage
+    localStorage.setItem("language", lang);
   };
 
   const handleSelect = (lang: Language) => {
-    if (lang !== language) {
+    if (lang !== currentLanguage) {
+      // Mettre à jour l'état local
+      setCurrentLanguage(lang);
+      
+      // Appliquer les changements directement
+      applyLanguage(lang);
+      
+      // Mettre à jour le contexte
       setLanguage(lang);
+      
+      // Fermer le menu dropdown
       setIsOpen(false);
       
+      // Préparer le toast
       const langInfo = languages.find(l => l.code === lang);
       if (langInfo) {
-        // Show toast to confirm language change
+        // Message adapté à la langue sélectionnée
         let message = "";
         if (lang === "en") {
           message = "Language changed to English";
@@ -48,6 +75,7 @@ export default function LanguageSelector({ isMobile = false }: LanguageSelectorP
           message = "تم تغيير اللغة إلى العربية";
         }
         
+        // Afficher le toast
         toast({
           title: langInfo.flag,
           description: message,
@@ -57,16 +85,17 @@ export default function LanguageSelector({ isMobile = false }: LanguageSelectorP
     }
   };
 
+  // Affichage mobile avec trois boutons côte à côte
   if (isMobile) {
     return (
-      <div className="flex space-x-3">
+      <div className="flex flex-wrap gap-2">
         {languages.map((lang) => (
           <Button
             key={lang.code}
-            variant={language === lang.code ? "default" : "outline"}
+            variant={currentLanguage === lang.code ? "default" : "outline"}
             size="sm"
             onClick={() => handleSelect(lang.code)}
-            className={language === lang.code ? "bg-primary" : ""}
+            className={`${currentLanguage === lang.code ? "bg-primary" : ""} min-w-[60px]`}
           >
             <span className="mr-1">{lang.flag}</span>
             {lang.code.toUpperCase()}
@@ -76,6 +105,7 @@ export default function LanguageSelector({ isMobile = false }: LanguageSelectorP
     );
   }
 
+  // Affichage normal avec menu déroulant
   const currentLang = getCurrentLanguageInfo();
 
   return (
@@ -91,12 +121,12 @@ export default function LanguageSelector({ isMobile = false }: LanguageSelectorP
           <ChevronDown className="h-4 w-4 ml-1" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-32">
+      <DropdownMenuContent align="end" className="w-40">
         {languages.map((lang) => (
           <DropdownMenuItem
             key={lang.code}
             onClick={() => handleSelect(lang.code)}
-            className={`cursor-pointer flex items-center ${language === lang.code ? 'bg-primary/10 text-primary font-medium' : ''}`}
+            className={`cursor-pointer flex items-center ${currentLanguage === lang.code ? 'bg-primary/10 text-primary font-medium' : ''}`}
           >
             <span className="mr-2">{lang.flag}</span>
             {lang.label}

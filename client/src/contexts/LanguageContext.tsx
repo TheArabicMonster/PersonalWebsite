@@ -235,56 +235,62 @@ const translations: Record<string, Record<Language, string>> = {
 
 // Create Provider Component
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  // Try-catch to handle any potential localStorage errors
-  const getSavedLanguage = (): Language => {
+  // Initialisation de la langue en se basant sur localStorage ou les préférences système
+  const [language, setLanguage] = useState<Language>(() => {
     try {
-      const savedLanguage = localStorage.getItem("language") as Language;
-      return savedLanguage === "en" || savedLanguage === "fr" || savedLanguage === "ar" 
-        ? savedLanguage 
-        : "en";
+      // Vérifier d'abord localStorage
+      const savedLanguage = localStorage.getItem("language");
+      if (savedLanguage === "en" || savedLanguage === "fr" || savedLanguage === "ar") {
+        return savedLanguage as Language;
+      }
+      
+      // Utiliser la langue du navigateur comme fallback
+      const browserLang = navigator.language.split('-')[0].toLowerCase();
+      if (browserLang === "fr") return "fr";
+      if (browserLang === "ar") return "ar";
+      
+      // Défaut en anglais
+      return "en";
     } catch (error) {
-      console.error("Error accessing localStorage:", error);
+      console.error("Error determining initial language:", error);
       return "en";
     }
-  };
+  });
 
-  const [language, setLanguage] = useState<Language>(getSavedLanguage());
-
-  // Apply language settings immediately on mount
-  useEffect(() => {
-    document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
-    document.documentElement.lang = language;
-  }, []);
-
+  // Appliquer les paramètres de langue immédiatement
   useEffect(() => {
     try {
-      // Save language preference
-      localStorage.setItem("language", language);
-      
-      // Set document direction for RTL support
+      // Définir la direction du document pour le support RTL
       document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
       
-      // Set the document language attribute
+      // Définir l'attribut de langue du document
       document.documentElement.lang = language;
+      
+      // Sauvegarder la préférence de langue
+      localStorage.setItem("language", language);
       
       console.log(`Language switched to: ${language}`);
     } catch (error) {
-      console.error("Error setting language preferences:", error);
+      console.error("Error applying language settings:", error);
     }
   }, [language]);
 
-  // Translation function
+  // Fonction de traduction
   const t = (key: string): string => {
     if (!translations[key]) {
-      console.warn(`Translation key not found: ${key}`);
+      // Avertissement uniquement en développement pour éviter de surcharger la console
+      if (process.env.NODE_ENV !== "production") {
+        console.warn(`Translation key not found: ${key}`);
+      }
       return key;
     }
     return translations[key][language] || key;
   };
 
   const handleSetLanguage = (lang: Language) => {
-    console.log("Changing language to:", lang);
-    setLanguage(lang);
+    if (lang !== language) {
+      setLanguage(lang);
+    }
   };
 
   const contextValue = {
