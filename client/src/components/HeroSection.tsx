@@ -4,6 +4,7 @@ import { socialLinks } from "../lib/constants";
 import { useLanguage } from "../contexts/LanguageContext";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Twitter, Mail } from "lucide-react";
+import profileImage from "../assets/mateen-profile.jpeg";
 
 export default function HeroSection() {
   const [sectionRef, isInView] = useIntersectionObserver<HTMLElement>({
@@ -146,7 +147,7 @@ export default function HeroSection() {
               <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary rounded-full opacity-20 blur-xl transform scale-95"></div>
               <div className="absolute inset-0 flex items-center justify-center">
                 <img 
-                  src="./images/mateen-profile.jpeg" 
+                  src={profileImage} 
                   alt="Mateen's profile" 
                   className="rounded-full w-56 h-56 sm:w-72 sm:h-72 object-cover border-4 border-white dark:border-background shadow-lg"
                 />
