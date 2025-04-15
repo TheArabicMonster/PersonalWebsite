@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222.2 47.4% 11.2%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 47.4% 11.2%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 47.4% 11.2%;
+    
+    --primary: 222.2 47.4% 58.8%;
+    --primary-foreground: 210 40% 98%;
+    
+    --secondary: 328 73% 70%;
+    --secondary-foreground: 210 40% 98%;
+    
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    
+    --accent: 196 84% 60%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 47.4% 58.8%;
+    
+    --radius: 0.5rem;
+
+    --chart-1: 222.2 47.4% 58.8%;
+    --chart-2: 328 73% 70%;
+    --chart-3: 196 84% 60%;
+    --chart-4: 270 80% 60%;
+    --chart-5: 180 70% 50%;
+  }
+  
+  .dark {
+    --background: 222.2 47.4% 11.2%;
+    --foreground: 210 40% 98%;
+    
+    --card: 222.2 47.4% 15%;
+    --card-foreground: 210 40% 98%;
+    
+    --popover: 222.2 47.4% 15%;
+    --popover-foreground: 210 40% 98%;
+    
+    --primary: 222.2 47.4% 58.8%;
+    --primary-foreground: 210 40% 98%;
+    
+    --secondary: 328 73% 70%;
+    --secondary-foreground: 210 40% 98%;
+    
+    --muted: 217.2 32.6% 20%;
+    --muted-foreground: 215 20.2% 65.1%;
+    
+    --accent: 196 84% 60%;
+    --accent-foreground: 210 40% 98%;
+    
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    
+    --border: 217.2 32.6% 25%;
+    --input: 217.2 32.6% 25%;
+    --ring: 222.2 47.4% 58.8%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+}
+
+@layer components {
+  .container {
+    @apply max-w-[1200px] mx-auto px-4 sm:px-6;
+  }
+  
+  .nav-link {
+    @apply font-medium text-foreground opacity-80 hover:opacity-100 hover:text-primary dark:hover:text-primary transition-all;
+  }
+  
+  .fade-in {
+    @apply opacity-0 translate-y-5;
+  }
+  
+  .fade-in.active {
+    @apply opacity-100 translate-y-0 transition-all duration-700 ease-out;
+  }
+  
+  .animate-float {
+    animation: float 5s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  .animate-typing::after {
+    content: "|";
+    animation: blink 1s infinite;
+  }
+  
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+}
