@@ -8,7 +8,7 @@ export const navItems = [
 
 export const typingPhrases = [
   { en: "Full Stack Developer", fr: "Développeur Full Stack", ar: "مطور ويب شامل" },
-  { en: "UI/UX Enthusiast", fr: "Passionné d'UI/UX", ar: "مهتم بتجربة المستخدم" },
+  { en: "Vue.js Developer", fr: "Développeur Vue.js", ar: "مطور Vue.js" },
   { en: "Problem Solver", fr: "Solutionneur de problèmes", ar: "حلال المشاكل" },
   { en: "Tech Explorer", fr: "Explorateur technologique", ar: "مستكشف التكنولوجيا" }
 ];
