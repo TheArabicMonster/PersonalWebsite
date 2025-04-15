@@ -248,7 +248,13 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const [language, setLanguage] = useState<Language>(getSavedLanguage);
+  const [language, setLanguage] = useState<Language>(getSavedLanguage());
+
+  // Apply language settings immediately on mount
+  useEffect(() => {
+    document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
+    document.documentElement.lang = language;
+  }, []);
 
   useEffect(() => {
     try {
@@ -257,6 +263,11 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       
       // Set document direction for RTL support
       document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
+      
+      // Set the document language attribute
+      document.documentElement.lang = language;
+      
+      console.log(`Language switched to: ${language}`);
     } catch (error) {
       console.error("Error setting language preferences:", error);
     }
@@ -271,9 +282,14 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     return translations[key][language] || key;
   };
 
+  const handleSetLanguage = (lang: Language) => {
+    console.log("Changing language to:", lang);
+    setLanguage(lang);
+  };
+
   const contextValue = {
     language,
-    setLanguage,
+    setLanguage: handleSetLanguage,
     t
   };
 
@@ -287,6 +303,8 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 // Custom hook to use the language context
 export function useLanguage() {
   const context = useContext(LanguageContext);
-  // This should no longer throw an error since we provided default values
+  if (!context) {
+    throw new Error("useLanguage must be used within a LanguageProvider");
+  }
   return context;
 }

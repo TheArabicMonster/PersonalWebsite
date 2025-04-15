@@ -24,7 +24,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       // Check for saved theme preference or use system preference
       const savedTheme = localStorage.getItem("theme");
       if (savedTheme === "light" || savedTheme === "dark") {
-        return savedTheme;
+        return savedTheme as Theme;
       }
       
       // Use system preference as fallback
@@ -37,28 +37,43 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const [theme, setTheme] = useState<Theme>(getInitialTheme);
+  const [theme, setTheme] = useState<Theme>(getInitialTheme());
+
+  // Apply theme immediately on mount
+  useEffect(() => {
+    document.documentElement.classList.remove("light", "dark");
+    document.documentElement.classList.add(theme);
+  }, []);
 
   useEffect(() => {
     try {
       // Apply theme to html element
       const html = document.documentElement;
       
-      if (theme === "dark") {
-        html.classList.add("dark");
-      } else {
-        html.classList.remove("dark");
-      }
+      // Remove both classes first to ensure clean state
+      html.classList.remove("light", "dark");
+      // Add the current theme class
+      html.classList.add(theme);
       
       // Save theme preference
       localStorage.setItem("theme", theme);
+      
+      // Apply theme to the theme tag for Shadcn components
+      document.documentElement.setAttribute("data-theme", theme);
+      
+      console.log(`Theme switched to: ${theme}`);
     } catch (error) {
       console.error("Error applying theme:", error);
     }
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === "light" ? "dark" : "light");
+    console.log("Toggle theme called, current theme:", theme);
+    setTheme(prevTheme => {
+      const newTheme = prevTheme === "light" ? "dark" : "light";
+      console.log("Setting new theme to:", newTheme);
+      return newTheme;
+    });
   };
 
   const contextValue = { 
@@ -75,6 +90,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
 export function useTheme() {
   const context = useContext(ThemeContext);
-  // This should no longer throw an error since we provided default values
+  if (!context) {
+    throw new Error("useTheme must be used within a ThemeProvider");
+  }
   return context;
 }
