@@ -185,6 +185,51 @@ const translations: Record<string, Record<Language, string>> = {
     "en": "Terms of Service",
     "fr": "Conditions d'utilisation",
     "ar": "شروط الخدمة"
+  },
+  "welcomeGenerator": {
+    "en": "Welcome Message Generator",
+    "fr": "Générateur de message de bienvenue",
+    "ar": "مولد رسائل الترحيب"
+  },
+  "welcomeGeneratorDesc": {
+    "en": "Get a personalized welcome message based on your name and interests.",
+    "fr": "Obtenez un message de bienvenue personnalisé basé sur votre nom et vos intérêts.",
+    "ar": "احصل على رسالة ترحيب مخصصة بناءً على اسمك واهتماماتك."
+  },
+  "yourName": {
+    "en": "Your Name",
+    "fr": "Votre Nom",
+    "ar": "اسمك"
+  },
+  "enterName": {
+    "en": "Enter your name",
+    "fr": "Entrez votre nom",
+    "ar": "أدخل اسمك"
+  },
+  "yourInterest": {
+    "en": "Your Interest",
+    "fr": "Votre Centre d'Intérêt",
+    "ar": "اهتمامك"
+  },
+  "enterInterest": {
+    "en": "E.g. Web Development, AI, Design...",
+    "fr": "Ex: Développement Web, IA, Design...",
+    "ar": "مثال: تطوير الويب، الذكاء الاصطناعي، التصميم..."
+  },
+  "generateMessage": {
+    "en": "Generate Message",
+    "fr": "Générer le Message",
+    "ar": "إنشاء الرسالة"
+  },
+  "tryAgain": {
+    "en": "Try Again",
+    "fr": "Réessayer",
+    "ar": "حاول مرة أخرى"
+  },
+  "copyMessage": {
+    "en": "Copy Message",
+    "fr": "Copier le Message",
+    "ar": "نسخ الرسالة"
   }
 };
 
