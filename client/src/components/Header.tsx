@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import ThemeToggle from "./ThemeToggle";
-import LanguageSelector from "./LanguageSelector";
+import LanguageSwitcher from "./LanguageSwitcher";
 import { navItems } from "../lib/constants";
 import { useLanguage } from "../contexts/LanguageContext";
 import { Menu, X } from "lucide-react";
@@ -82,7 +82,7 @@ export default function Header() {
 
             <div className="flex items-center space-x-4">
               <ThemeToggle />
-              <LanguageSelector />
+              <LanguageSwitcher />
             </div>
           </nav>
         </div>
@@ -103,7 +103,7 @@ export default function Header() {
               </a>
             ))}
             <div className="flex items-center justify-between pt-3 border-t border-gray-200 dark:border-gray-700">
-              <LanguageSelector isMobile />
+              <LanguageSwitcher isMobile />
               <ThemeToggle />
             </div>
           </div>
