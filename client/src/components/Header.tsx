@@ -1,18 +1,15 @@
 import { useState, useEffect } from "react";
 import ThemeToggle from "./ThemeToggle";
 import DirectLanguageSwitcher from "./DirectLanguageSwitcher";
-import MobileLanguageSwitcher from "./MobileLanguageSwitcher";
 import { navItems } from "../lib/constants";
 import { useLanguage } from "../contexts/LanguageContext";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useIsMobile } from "../hooks/use-mobile";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { language } = useLanguage();
-  const isMobile = useIsMobile();
 
   // Handle scroll effect
   useEffect(() => {
@@ -85,7 +82,7 @@ export default function Header() {
 
             <div className="flex items-center space-x-4">
               <ThemeToggle />
-              {isMobile ? <MobileLanguageSwitcher /> : <DirectLanguageSwitcher />}
+              <DirectLanguageSwitcher />
             </div>
           </nav>
         </div>
@@ -106,7 +103,7 @@ export default function Header() {
               </a>
             ))}
             <div className="flex items-center justify-between pt-3 border-t border-gray-200 dark:border-gray-700">
-              <MobileLanguageSwitcher />
+              <DirectLanguageSwitcher isMobile />
               <ThemeToggle />
             </div>
           </div>
