@@ -146,7 +146,7 @@ export default function HeroSection() {
               <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary rounded-full opacity-20 blur-xl transform scale-95"></div>
               <div className="absolute inset-0 flex items-center justify-center">
                 <img 
-                  src="/images/mateen-profile.jpeg" 
+                  src="./images/mateen-profile.jpeg" 
                   alt="Mateen's profile" 
                   className="rounded-full w-56 h-56 sm:w-72 sm:h-72 object-cover border-4 border-white dark:border-background shadow-lg"
                 />
