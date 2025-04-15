@@ -41,7 +41,9 @@
     --chart-5: 180 70% 50%;
   }
   
-  .dark {
+  .dark,
+  [data-theme="dark"],
+  html[data-theme="dark"] {
     --background: 222.2 47.4% 11.2%;
     --foreground: 210 40% 98%;
     
@@ -69,6 +71,13 @@
     --border: 217.2 32.6% 25%;
     --input: 217.2 32.6% 25%;
     --ring: 222.2 47.4% 58.8%;
+  }
+  
+  /* Force-apply dark mode when .dark class is on html */
+  html.dark {
+    color-scheme: dark;
+    background-color: hsl(222.2, 47.4%, 11.2%);
+    color: hsl(210, 40%, 98%);
   }
 
   * {
