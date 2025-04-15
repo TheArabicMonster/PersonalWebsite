@@ -74,10 +74,33 @@
   }
   
   /* Force-apply dark mode when .dark class is on html */
-  html.dark {
-    color-scheme: dark;
-    background-color: hsl(222.2, 47.4%, 11.2%);
-    color: hsl(210, 40%, 98%);
+  html.dark,
+  html[data-theme="dark"],
+  :root[data-theme="dark"],
+  .dark {
+    color-scheme: dark !important;
+    background-color: hsl(222.2, 47.4%, 11.2%) !important;
+    color: hsl(210, 40%, 98%) !important;
+  }
+  
+  /* Specific overrides for dark mode */
+  html.dark body,
+  html[data-theme="dark"] body,
+  .dark body {
+    background-color: hsl(222.2, 47.4%, 11.2%) !important;
+    color: hsl(210, 40%, 98%) !important;
+  }
+  
+  html.dark .bg-background,
+  html[data-theme="dark"] .bg-background,
+  .dark .bg-background {
+    background-color: hsl(222.2, 47.4%, 11.2%) !important;
+  }
+  
+  html.dark .text-foreground,
+  html[data-theme="dark"] .text-foreground,
+  .dark .text-foreground {
+    color: hsl(210, 40%, 98%) !important;
   }
 
   * {
