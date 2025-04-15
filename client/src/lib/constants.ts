@@ -3,6 +3,7 @@ export const navItems = [
   { id: "about", label: "About", labelFr: "À propos", labelAr: "حول" },
   { id: "projects", label: "Projects", labelFr: "Projets", labelAr: "مشاريع" },
   { id: "experience", label: "Experience", labelFr: "Expérience", labelAr: "خبرة" },
+  { id: "welcome-generator", label: "Welcome Generator", labelFr: "Générateur de Message", labelAr: "مولد الترحيب" },
   { id: "contact", label: "Contact", labelFr: "Contact", labelAr: "اتصل بنا" }
 ];
 

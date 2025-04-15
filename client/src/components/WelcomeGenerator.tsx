@@ -157,8 +157,15 @@ export default function WelcomeGenerator() {
             <Button variant="outline" onClick={resetForm} className="flex-1">
               {t('tryAgain')}
             </Button>
-            {/* Later we can add copy to clipboard functionality */}
-            <Button className="flex-1">
+            <Button 
+              className="flex-1" 
+              onClick={copyToClipboard}
+            >
+              {copied ? (
+                <Check className="mr-2 h-4 w-4" />
+              ) : (
+                <Copy className="mr-2 h-4 w-4" />
+              )}
               {t('copyMessage')}
             </Button>
           </div>
