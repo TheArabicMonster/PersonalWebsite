@@ -41,8 +41,12 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   // Apply theme immediately on mount
   useEffect(() => {
-    document.documentElement.classList.remove("light", "dark");
-    document.documentElement.classList.add(theme);
+    const html = document.documentElement;
+    if (theme === "dark") {
+      html.classList.add("dark");
+    } else {
+      html.classList.remove("dark");
+    }
   }, []);
 
   useEffect(() => {
@@ -50,16 +54,14 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       // Apply theme to html element
       const html = document.documentElement;
       
-      // Remove both classes first to ensure clean state
-      html.classList.remove("light", "dark");
-      // Add the current theme class
-      html.classList.add(theme);
+      if (theme === "dark") {
+        html.classList.add("dark");
+      } else {
+        html.classList.remove("dark");
+      }
       
       // Save theme preference
       localStorage.setItem("theme", theme);
-      
-      // Apply theme to the theme tag for Shadcn components
-      document.documentElement.setAttribute("data-theme", theme);
       
       console.log(`Theme switched to: ${theme}`);
     } catch (error) {
