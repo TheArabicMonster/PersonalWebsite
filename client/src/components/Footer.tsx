@@ -27,7 +27,7 @@ export default function Footer() {
               href="#"
               className="text-2xl font-bold text-white hover:text-primary transition-colors"
             >
-              <span className="font-mono">Youssef</span>
+              <span className="font-mono">Mateen</span>
             </a>
             <p className="mt-2 text-gray-400 max-w-md">
               {t('footer.description')}
@@ -101,7 +101,7 @@ export default function Footer() {
         
         <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row md:justify-between md:items-center">
           <p className="text-gray-500">
-            &copy; {currentYear} Youssef. {t('footer.copyright')}
+            &copy; {currentYear} Mateen. {t('footer.copyright')}
           </p>
           
           <div className="mt-4 md:mt-0">

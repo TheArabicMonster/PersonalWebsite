@@ -53,7 +53,7 @@ export default function Header() {
             href="#"
             className="text-2xl font-bold text-primary transition-all hover:text-secondary"
           >
-            <span className="font-mono">Youssef</span>
+            <span className="font-mono">Mateen</span>
           </a>
 
           {/* Mobile Menu Button */}
