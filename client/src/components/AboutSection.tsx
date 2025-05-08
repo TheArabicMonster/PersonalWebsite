@@ -42,7 +42,7 @@ export default function AboutSection() {
       <div className="container mx-auto px-4 sm:px-6">
         <div className="mb-12 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            {t('about.title').split(' ')[0]} <span className="text-primary">{t('about.title').split(' ')[1]}</span>
+            <span>{t('about.title.first')}</span> <span className="text-primary">{t('about.title.second')}</span>
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto"></div>
         </div>

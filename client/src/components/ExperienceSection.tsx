@@ -19,7 +19,7 @@ export default function ExperienceSection() {
       <div className="container mx-auto px-4 sm:px-6">
         <div className="mb-12 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            {t('experience.title').split(' ')[0]} <span className="text-primary">{t('experience.title').split(' ')[1]}</span>
+            <span>{t('experience.title.first')}</span> <span className="text-primary">{t('experience.title.second')}</span>
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto"></div>
           <p className="mt-6 text-lg opacity-80 max-w-2xl mx-auto">

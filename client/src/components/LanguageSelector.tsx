@@ -17,7 +17,7 @@ interface LanguageSelectorProps {
 export default function LanguageSelector({ isMobile = false }: LanguageSelectorProps) {
   // Utilisez useState pour suivre la langue actuelle dans le composant
   const [currentLanguage, setCurrentLanguage] = useState<Language>("en");
-  const { language, setLanguage } = useLanguage();
+  const { language, setLanguage, t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const { toast } = useToast();
 
@@ -65,20 +65,10 @@ export default function LanguageSelector({ isMobile = false }: LanguageSelectorP
       // Préparer le toast
       const langInfo = languages.find(l => l.code === lang);
       if (langInfo) {
-        // Message adapté à la langue sélectionnée
-        let message = "";
-        if (lang === "en") {
-          message = "Language changed to English";
-        } else if (lang === "fr") {
-          message = "Langue changée en Français";
-        } else if (lang === "ar") {
-          message = "تم تغيير اللغة إلى العربية";
-        }
-        
-        // Afficher le toast
+        // Utiliser la fonction de traduction pour les messages
         toast({
           title: langInfo.flag,
-          description: message,
+          description: t(`language.changed.${lang}`),
           duration: 2000,
         });
       }

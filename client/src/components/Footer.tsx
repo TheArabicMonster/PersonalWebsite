@@ -3,20 +3,8 @@ import { useLanguage } from "../contexts/LanguageContext";
 import { Github, Linkedin, Twitter, Dribbble } from "lucide-react";
 
 export default function Footer() {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   const currentYear = new Date().getFullYear();
-  
-  // Get the correct label based on the current language
-  const getNavLabel = (item: typeof navItems[0]) => {
-    switch (language) {
-      case "fr":
-        return item.labelFr;
-      case "ar":
-        return item.labelAr;
-      default:
-        return item.label;
-    }
-  };
 
   return (
     <footer className="bg-gray-900 text-white py-12">
@@ -44,7 +32,7 @@ export default function Footer() {
                       href={`#${item.id}`}
                       className="text-gray-400 hover:text-primary transition-colors"
                     >
-                      {getNavLabel(item)}
+                      {t(`navItems.${item.id}`)}
                     </a>
                   </li>
                 ))}

@@ -16,26 +16,18 @@ export default function WelcomeGenerator() {
   const { toast } = useToast();
   const { t, language } = useLanguage();
 
-  // Simulated predefined messages in different languages
-  const predefinedMessages = {
-    en: [
-      "Welcome, [name]! I see you're interested in [interest]. Let's explore how my projects and skills align with your interests.",
-      "Hello [name]! Thanks for visiting my portfolio. I notice you're passionate about [interest]. I have some related projects you might like.",
-      "Great to meet you, [name]! Your interest in [interest] shows good taste. Feel free to check out my work in this area.",
-      "Welcome aboard, [name]! As a fellow [interest] enthusiast, I think you'll find my portfolio showcases relevant skills and projects."
-    ],
-    fr: [
-      "Bienvenue, [name] ! Je vois que vous êtes intéressé(e) par [interest]. Explorons comment mes projets et compétences correspondent à vos intérêts.",
-      "Bonjour [name] ! Merci de visiter mon portfolio. Je remarque que vous êtes passionné(e) par [interest]. J'ai quelques projets connexes qui pourraient vous plaire.",
-      "Ravi de vous rencontrer, [name] ! Votre intérêt pour [interest] montre votre bon goût. N'hésitez pas à consulter mon travail dans ce domaine.",
-      "Bienvenue à bord, [name] ! En tant que passionné(e) de [interest], je pense que vous trouverez que mon portfolio met en valeur des compétences et des projets pertinents."
-    ],
-    ar: [
-      "مرحبًا، [name]! أرى أنك مهتم بـ [interest]. دعنا نستكشف كيف تتوافق مشاريعي ومهاراتي مع اهتماماتك.",
-      "مرحبًا [name]! شكرًا لزيارة محفظتي. ألاحظ أنك شغوف بـ [interest]. لدي بعض المشاريع ذات الصلة التي قد تعجبك.",
-      "سعيد بلقائك، [name]! اهتمامك بـ [interest] يدل على ذوقك الجيد. لا تتردد في الاطلاع على عملي في هذا المجال.",
-      "أهلاً بك، [name]! بصفتك متحمسًا لـ [interest]، أعتقد أنك ستجد أن محفظتي تعرض المهارات والمشاريع ذات الصلة."
-    ]
+  // Obtenir les messages prédéfinis à partir de traductions
+  const getPredefinedMessages = () => {
+    // Clés de traduction pour les messages
+    const messageKeys = [
+      'welcomeGenerator.message1',
+      'welcomeGenerator.message2',
+      'welcomeGenerator.message3',
+      'welcomeGenerator.message4',
+    ];
+    
+    // Récupérer le message traduit pour la langue actuelle
+    return messageKeys.map(key => t(key));
   };
 
   const generateWelcomeMessage = () => {
@@ -45,8 +37,8 @@ export default function WelcomeGenerator() {
     
     // Simulate API call delay
     setTimeout(() => {
-      // Select a random message from the predefined list based on current language
-      const messages = predefinedMessages[language as keyof typeof predefinedMessages] || predefinedMessages.en;
+      // Obtenir les messages traduits
+      const messages = getPredefinedMessages();
       const randomIndex = Math.floor(Math.random() * messages.length);
       let selectedMessage = messages[randomIndex];
       

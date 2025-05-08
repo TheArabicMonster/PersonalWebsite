@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const { language } = useLanguage();
+  const { t } = useLanguage();
 
   // Handle scroll effect
   useEffect(() => {
@@ -27,18 +27,6 @@ export default function Header() {
 
   const closeMenu = () => {
     setIsMenuOpen(false);
-  };
-
-  // Get the correct label based on the current language
-  const getNavLabel = (item: typeof navItems[0]) => {
-    switch (language) {
-      case "fr":
-        return item.labelFr;
-      case "ar":
-        return item.labelAr;
-      default:
-        return item.label;
-    }
   };
 
   return (
@@ -76,7 +64,7 @@ export default function Header() {
                 className="nav-link"
                 onClick={closeMenu}
               >
-                {getNavLabel(item)}
+                {t(item.label)}
               </a>
             ))}
 
@@ -99,7 +87,7 @@ export default function Header() {
                 className="block py-2 font-medium text-foreground hover:text-primary transition-all"
                 onClick={closeMenu}
               >
-                {getNavLabel(item)}
+                {t(item.label)}
               </a>
             ))}
             <div className="flex items-center justify-between pt-3 border-t border-gray-200 dark:border-gray-700">

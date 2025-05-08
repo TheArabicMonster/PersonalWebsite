@@ -21,15 +21,102 @@ const LanguageContext = createContext<LanguageContextType>(defaultContext);
 
 // Define translations
 const translations: Record<string, Record<Language, string>> = {
+  // Navigation items
+  "home": {
+    "en": "Home",
+    "fr": "Accueil",
+    "ar": "الرئيسية"
+  },
+  "about": {
+    "en": "About",
+    "fr": "À propos",
+    "ar": "حول"
+  },
+  "projects": {
+    "en": "Projects",
+    "fr": "Projets",
+    "ar": "مشاريع"
+  },
+  "experience": {
+    "en": "Experience",
+    "fr": "Expérience",
+    "ar": "خبرة"
+  },
+  "welcome-generator": {
+    "en": "Welcome Generator",
+    "fr": "Générateur de Message",
+    "ar": "مولد الترحيب"
+  },
+  "contact": {
+    "en": "Contact",
+    "fr": "Contact",
+    "ar": "اتصل بنا"
+  },
+  
+  // Navigation items with structured ids
+  "navItems.home": {
+    "en": "Home",
+    "fr": "Accueil",
+    "ar": "الرئيسية"
+  },
+  "navItems.about": {
+    "en": "About",
+    "fr": "À propos",
+    "ar": "حول"
+  },
+  "navItems.projects": {
+    "en": "Projects",
+    "fr": "Projets",
+    "ar": "مشاريع"
+  },
+  "navItems.experience": {
+    "en": "Experience",
+    "fr": "Expérience",
+    "ar": "خبرة"
+  },
+  "navItems.welcome-generator": {
+    "en": "Welcome Generator",
+    "fr": "Générateur de Message",
+    "ar": "مولد الترحيب"
+  },
+  "navItems.contact": {
+    "en": "Contact",
+    "fr": "Contact",
+    "ar": "اتصل بنا"
+  },
+  
+  // Hero section
   "greeting": {
     "en": "Hello, I'm",
     "fr": "Bonjour, je suis",
     "ar": "مرحباً، أنا"
   },
-  "about.title": {
-    "en": "About Me",
-    "fr": "À propos de moi",
-    "ar": "عني"
+  "hero.description": {
+    "en": "I craft engaging digital experiences using modern technologies. Turning complex problems into elegant solutions is what drives my passion for development.",
+    "fr": "Je conçois des expériences numériques attrayantes en utilisant des technologies modernes. Transformer des problèmes complexes en solutions élégantes est ce qui anime ma passion pour le développement.",
+    "ar": "أصمم تجارب رقمية جذابة باستخدام التقنيات الحديثة. تحويل المشكلات المعقدة إلى حلول أنيقة هو ما يدفع شغفي بالتطوير."
+  },
+  "viewWork": {
+    "en": "View My Work",
+    "fr": "Voir mon travail",
+    "ar": "عرض أعمالي"
+  },
+  "getInTouch": {
+    "en": "Get In Touch",
+    "fr": "Entrer en contact",
+    "ar": "تواصل معي"
+  },
+  
+  // About section
+  "about.title.first": {
+    "en": "About",
+    "fr": "À",
+    "ar": "عن"
+  },
+  "about.title.second": {
+    "en": "Me",
+    "fr": "propos",
+    "ar": "نفسي"
   },
   "about.who": {
     "en": "Who am I?",
@@ -49,12 +136,19 @@ const translations: Record<string, Record<Language, string>> = {
   "about.description2": {
     "en": "My approach to development combines technical expertise with a strong design sensibility. I believe that great code should not only function flawlessly but also provide an exceptional user experience.",
     "fr": "Mon approche du développement combine expertise technique et sensibilité au design. Je crois que le bon code ne doit pas seulement fonctionner parfaitement, mais aussi offrir une expérience utilisateur exceptionnelle.",
-    "ar": "ينهجي في التطوير يجمع بين الخبرة التقنية وحساسية التصميم القوية. أعتقد أن الكود الرائع يجب ألا يعمل فقط بشكل مثالي ولكن يوفر أيضًا تجربة مستخدم استثنائية."
+    "ar": "نهجي في التطوير يجمع بين الخبرة التقنية وحساسية التصميم القوية. أعتقد أن الكود الرائع يجب ألا يعمل فقط بشكل مثالي ولكن يوفر أيضًا تجربة مستخدم استثنائية."
   },
-  "projects.title": {
-    "en": "My Projects",
-    "fr": "Mes projets",
+  
+  // Projects section
+  "projects.title.first": {
+    "en": "My",
+    "fr": "Mes",
     "ar": "مشاريعي"
+  },
+  "projects.title.second": {
+    "en": "Projects",
+    "fr": "Projets",
+    "ar": ""
   },
   "projects.subtitle": {
     "en": "Here are some of my recent projects that showcase my skills and expertise.",
@@ -66,10 +160,17 @@ const translations: Record<string, Record<Language, string>> = {
     "fr": "Voir plus sur GitHub",
     "ar": "عرض المزيد على GitHub"
   },
-  "experience.title": {
-    "en": "Work Experience",
-    "fr": "Expérience professionnelle",
-    "ar": "الخبرة المهنية"
+  
+  // Experience section
+  "experience.title.first": {
+    "en": "Work",
+    "fr": "Expérience",
+    "ar": "الخبرة"
+  },
+  "experience.title.second": {
+    "en": "Experience",
+    "fr": "professionnelle",
+    "ar": "المهنية"
   },
   "experience.subtitle": {
     "en": "My professional journey in the tech industry.",
@@ -81,10 +182,17 @@ const translations: Record<string, Record<Language, string>> = {
     "fr": "Éducation",
     "ar": "التعليم"
   },
-  "contact.title": {
-    "en": "Get In Touch",
-    "fr": "Entrer en contact",
-    "ar": "تواصل معي"
+  
+  // Contact section
+  "contact.title.first": {
+    "en": "Get In",
+    "fr": "Entrer en",
+    "ar": "تواصل"
+  },
+  "contact.title.second": {
+    "en": "Touch",
+    "fr": "Contact",
+    "ar": "معي"
   },
   "contact.subtitle": {
     "en": "Have a project in mind or want to collaborate? Feel free to reach out!",
@@ -141,20 +249,12 @@ const translations: Record<string, Record<Language, string>> = {
     "fr": "Connectez-vous avec moi",
     "ar": "تواصل معي"
   },
+  
+  // Footer
   "resume.download": {
     "en": "Download Resume",
     "fr": "Télécharger le CV",
     "ar": "تحميل السيرة الذاتية"
-  },
-  "viewWork": {
-    "en": "View My Work",
-    "fr": "Voir mon travail",
-    "ar": "عرض أعمالي"
-  },
-  "getInTouch": {
-    "en": "Get In Touch",
-    "fr": "Entrer en contact",
-    "ar": "تواصل معي"
   },
   "footer.copyright": {
     "en": "All rights reserved.",
@@ -186,6 +286,8 @@ const translations: Record<string, Record<Language, string>> = {
     "fr": "Conditions d'utilisation",
     "ar": "شروط الخدمة"
   },
+  
+  // Welcome Generator
   "welcomeGenerator": {
     "en": "Welcome Message Generator",
     "fr": "Générateur de message de bienvenue",
@@ -195,6 +297,26 @@ const translations: Record<string, Record<Language, string>> = {
     "en": "Get a personalized welcome message based on your name and interests.",
     "fr": "Obtenez un message de bienvenue personnalisé basé sur votre nom et vos intérêts.",
     "ar": "احصل على رسالة ترحيب مخصصة بناءً على اسمك واهتماماتك."
+  },
+  "welcomeGenerator.message1": {
+    "en": "Welcome, [name]! We're thrilled to have someone passionate about [interest] join our community. Looking forward to your contributions!",
+    "fr": "Bienvenue, [name] ! Nous sommes ravis d'accueillir quelqu'un de passionné par [interest] dans notre communauté. Nous attendons vos contributions avec impatience !",
+    "ar": "مرحبًا، [name]! نحن متحمسون لانضمام شخص شغوف بـ [interest] إلى مجتمعنا. نتطلع إلى مساهماتك!"
+  },
+  "welcomeGenerator.message2": {
+    "en": "Hello [name]! Your interest in [interest] makes you a perfect addition to our team. We can't wait to collaborate with you!",
+    "fr": "Bonjour [name] ! Votre intérêt pour [interest] fait de vous une addition parfaite à notre équipe. Nous avons hâte de collaborer avec vous !",
+    "ar": "مرحبًا [name]! اهتمامك بـ [interest] يجعلك إضافة مثالية لفريقنا. لا يمكننا الانتظار للتعاون معك!"
+  },
+  "welcomeGenerator.message3": {
+    "en": "A warm welcome to [name]! Your expertise in [interest] is exactly what we've been looking for. Great to have you on board!",
+    "fr": "Un chaleureux accueil à [name] ! Votre expertise en [interest] est exactement ce que nous cherchions. Ravi de vous avoir parmi nous !",
+    "ar": "ترحيب حار بـ [name]! خبرتك في [interest] هي بالضبط ما كنا نبحث عنه. رائع أن تكون معنا!"
+  },
+  "welcomeGenerator.message4": {
+    "en": "Welcome aboard, [name]! We're excited to see how your passion for [interest] will inspire our projects. Let's create amazing things together!",
+    "fr": "Bienvenue à bord, [name] ! Nous sommes impatients de voir comment votre passion pour [interest] inspirera nos projets. Créons des choses incroyables ensemble !",
+    "ar": "مرحبًا بك على متن السفينة، [name]! نحن متحمسون لرؤية كيف سيلهم شغفك بـ [interest] مشاريعنا. دعنا نبدع أشياء مذهلة معًا!"
   },
   "yourName": {
     "en": "Your Name",
@@ -230,7 +352,24 @@ const translations: Record<string, Record<Language, string>> = {
     "en": "Copy Message",
     "fr": "Copier le Message",
     "ar": "نسخ الرسالة"
-  }
+  },
+  
+  // Messages de changement de langue
+  "language.changed.en": {
+    "en": "Language changed to English",
+    "fr": "Langue changée en Anglais",
+    "ar": "تم تغيير اللغة إلى الإنجليزية"
+  },
+  "language.changed.fr": {
+    "en": "Language changed to French",
+    "fr": "Langue changée en Français",
+    "ar": "تم تغيير اللغة إلى الفرنسية"
+  },
+  "language.changed.ar": {
+    "en": "Language changed to Arabic",
+    "fr": "Langue changée en Arabe",
+    "ar": "تم تغيير اللغة إلى العربية"
+  },
 };
 
 // Create Provider Component

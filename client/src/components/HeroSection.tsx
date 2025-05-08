@@ -73,8 +73,7 @@ export default function HeroSection() {
                 className="text-lg opacity-80 leading-relaxed max-w-lg"
                 variants={itemVariants}
               >
-                I craft engaging digital experiences using modern technologies. Turning complex problems into elegant solutions 
-                is what drives my passion for development.
+                {t('hero.description')}
               </motion.p>
               
               <motion.div 
