@@ -24,37 +24,25 @@ export default function LanguageSwitcher({ isMobile = false }: LanguageSwitcherP
   const handleSelectLanguage = (lang: Language) => {
     if (lang !== language) {
       try {
-        // 1. Préparer le message du toast
-        let message = "";
-        if (lang === "en") {
-          message = "Language changed to English";
-        } else if (lang === "fr") {
-          message = "Langue changée en Français";
-        } else if (lang === "ar") {
-          message = "تم تغيير اللغة إلى العربية";
-        }
-      
-        // 2. Afficher le toast
-        const langInfo = languages.find(l => l.code === lang);
-        if (langInfo) {
-          toast({
-            title: langInfo.flag,
-            description: message,
-            duration: 2000,
-          });
-        }
-        
-        // 3. Appliquer le changement directement pour les attributs DOM
+        // 1. Appliquer le changement directement pour les attributs DOM
         document.documentElement.lang = lang;
         document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
         localStorage.setItem("language", lang);
       
-        // 4. Changer le contexte React
+        // 2. Changer le contexte React
         setLanguage(lang);
         
-        // 5. Pour éviter tout problème de synchronisation, rechargeons la page
-        window.location.reload();
+        // 3. Afficher le toast avec la fonction t() pour une traduction cohérente
+        const langInfo = languages.find(l => l.code === lang);
+        if (langInfo) {
+          toast({
+            title: langInfo.flag,
+            description: t(`language.changed.${lang}`),
+            duration: 2000,
+          });
+        }
         
+        // Plus de rechargement de page
       } catch (error) {
         console.error("Error changing language:", error);
         toast({

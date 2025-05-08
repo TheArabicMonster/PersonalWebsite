@@ -7,7 +7,7 @@ export type Language = "en" | "fr" | "ar";
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
-  t: (key: string) => string;
+  t: (key: string, params?: Record<string, string>) => string;
 }
 
 // Create the context with a default value
@@ -354,6 +354,18 @@ const translations: Record<string, Record<Language, string>> = {
     "ar": "نسخ الرسالة"
   },
   
+  // Messages de copie
+  "copySuccess": {
+    "en": "Message copied to clipboard successfully!",
+    "fr": "Message copié dans le presse-papiers avec succès !",
+    "ar": "تم نسخ الرسالة إلى الحافظة بنجاح!"
+  },
+  "copyError": {
+    "en": "Failed to copy the message. Please try again.",
+    "fr": "Échec de la copie du message. Veuillez réessayer.",
+    "ar": "فشل نسخ الرسالة. يرجى المحاولة مرة أخرى."
+  },
+  
   // Messages de changement de langue
   "language.changed.en": {
     "en": "Language changed to English",
@@ -370,76 +382,74 @@ const translations: Record<string, Record<Language, string>> = {
     "fr": "Langue changée en Arabe",
     "ar": "تم تغيير اللغة إلى العربية"
   },
+
+  // Animation de typing
+  "typing.fullstack": {
+    "en": "Full Stack Developer",
+    "fr": "Développeur Full Stack",
+    "ar": "مطور الويب الشامل"
+  },
+  "typing.vue": {
+    "en": "Vue.js Enthusiast",
+    "fr": "Passionné de Vue.js",
+    "ar": "متحمس لـ Vue.js"
+  },
+  "typing.problem": {
+    "en": "Problem Solver",
+    "fr": "Résolveur de Problèmes",
+    "ar": "حلال المشكلات"
+  },
+  "typing.explorer": {
+    "en": "Tech Explorer",
+    "fr": "Explorateur Technologique",
+    "ar": "مستكشف التكنولوجيا"
+  },
+
+  // Thèmes
+  "theme.dark": {
+    "en": "Dark mode activated",
+    "fr": "Mode sombre activé",
+    "ar": "تم تفعيل الوضع الداكن"
+  },
+  "theme.light": {
+    "en": "Light mode activated",
+    "fr": "Mode clair activé",
+    "ar": "تم تفعيل الوضع الفاتح"
+  },
 };
 
 // Create Provider Component
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  // Initialisation de la langue en se basant sur localStorage ou les préférences système
-  const [language, setLanguage] = useState<Language>(() => {
-    try {
-      // Vérifier d'abord localStorage
-      const savedLanguage = localStorage.getItem("language");
-      if (savedLanguage === "en" || savedLanguage === "fr" || savedLanguage === "ar") {
-        return savedLanguage as Language;
-      }
-      
-      // Utiliser la langue du navigateur comme fallback
-      const browserLang = navigator.language.split('-')[0].toLowerCase();
-      if (browserLang === "fr") return "fr";
-      if (browserLang === "ar") return "ar";
-      
-      // Défaut en anglais
-      return "en";
-    } catch (error) {
-      console.error("Error determining initial language:", error);
-      return "en";
+  const [language, setLanguageState] = useState<Language>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("language");
+      if (saved === "en" || saved === "fr" || saved === "ar") return saved;
+      const browser = navigator.language.split('-')[0].toLowerCase();
+      if (browser === "fr") return "fr";
+      if (browser === "ar") return "ar";
     }
+    return "en";
   });
 
-  // Appliquer les paramètres de langue immédiatement
   useEffect(() => {
-    try {
-      // Définir la direction du document pour le support RTL
-      document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
-      
-      // Définir l'attribut de langue du document
-      document.documentElement.lang = language;
-      
-      // Sauvegarder la préférence de langue
-      localStorage.setItem("language", language);
-      
-      console.log(`Language switched to: ${language}`);
-    } catch (error) {
-      console.error("Error applying language settings:", error);
-    }
+    document.documentElement.lang = language;
+    document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
+    localStorage.setItem("language", language);
   }, [language]);
 
-  // Fonction de traduction
-  const t = (key: string): string => {
-    if (!translations[key]) {
-      // Avertissement uniquement en développement pour éviter de surcharger la console
-      if (process.env.NODE_ENV !== "production") {
-        console.warn(`Translation key not found: ${key}`);
-      }
-      return key;
-    }
-    return translations[key][language] || key;
-  };
+  const setLanguage = (lang: Language) => setLanguageState(lang);
 
-  const handleSetLanguage = (lang: Language) => {
-    if (lang !== language) {
-      setLanguage(lang);
-    }
-  };
-
-  const contextValue = {
-    language,
-    setLanguage: handleSetLanguage,
-    t
+  const t = (key: string, params?: Record<string, string>) => {
+    if (!translations[key]) return key;
+    let txt = translations[key][language] || key;
+    if (params) Object.entries(params).forEach(([k, v]) => {
+      txt = txt.replace(new RegExp(`\\[${k}\\]`, "g"), v);
+    });
+    return txt;
   };
 
   return (
-    <LanguageContext.Provider value={contextValue}>
+    <LanguageContext.Provider value={{ language, setLanguage, t }}>
       {children}
     </LanguageContext.Provider>
   );

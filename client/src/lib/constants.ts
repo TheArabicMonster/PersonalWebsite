@@ -1,17 +1,18 @@
 export const navItems = [
-  { id: "home", label: "Home", labelFr: "Accueil", labelAr: "الرئيسية" },
-  { id: "about", label: "About", labelFr: "À propos", labelAr: "حول" },
-  { id: "projects", label: "Projects", labelFr: "Projets", labelAr: "مشاريع" },
-  { id: "experience", label: "Experience", labelFr: "Expérience", labelAr: "خبرة" },
-  { id: "welcome-generator", label: "Welcome Generator", labelFr: "Générateur de Message", labelAr: "مولد الترحيب" },
-  { id: "contact", label: "Contact", labelFr: "Contact", labelAr: "اتصل بنا" }
+  { id: "home", label: "navItems.home" },
+  { id: "about", label: "navItems.about" },
+  { id: "projects", label: "navItems.projects" },
+  { id: "experience", label: "navItems.experience" },
+  { id: "welcome-generator", label: "navItems.welcome-generator" },
+  { id: "contact", label: "navItems.contact" }
 ];
 
-export const typingPhrases = [
-  { en: "Full Stack Developer", fr: "Développeur Full Stack", ar: "مطور ويب شامل" },
-  { en: "Vue.js Developer", fr: "Développeur Vue.js", ar: "مطور Vue.js" },
-  { en: "Problem Solver", fr: "Solutionneur de problèmes", ar: "حلال المشاكل" },
-  { en: "Tech Explorer", fr: "Explorateur technologique", ar: "مستكشف التكنولوجيا" }
+// Les phrases de l'animation de typing seront gérées par la fonction t()
+export const typingPhrasesKeys = [
+  "typing.fullstack",
+  "typing.vue",
+  "typing.problem",
+  "typing.explorer"
 ];
 
 export const skills = [

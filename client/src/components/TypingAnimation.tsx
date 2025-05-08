@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from "react";
-import { typingPhrases } from "../lib/constants";
+import { typingPhrasesKeys } from "../lib/constants";
 import { useLanguage } from "../contexts/LanguageContext";
 
 export default function TypingAnimation() {
   const [displayText, setDisplayText] = useState("");
-  const { language } = useLanguage();
+  const { t, language } = useLanguage();
   const phraseIndex = useRef(0);
   const charIndex = useRef(0);
   const isDeleting = useRef(false);
@@ -20,20 +20,7 @@ export default function TypingAnimation() {
   }, [language]);
 
   useEffect(() => {
-    const getLocalizedPhrases = () => {
-      return typingPhrases.map(phrase => {
-        switch (language) {
-          case "fr":
-            return phrase.fr;
-          case "ar":
-            return phrase.ar;
-          default:
-            return phrase.en;
-        }
-      });
-    };
-    
-    const phrases = getLocalizedPhrases();
+    const phrases = typingPhrasesKeys.map(key => t(key));
     const currentPhrase = phrases[phraseIndex.current];
     
     const typeText = () => {
@@ -68,7 +55,7 @@ export default function TypingAnimation() {
     return () => {
       clearTimeout(typingTimeout);
     };
-  }, [displayText, language]);
+  }, [displayText, language, t]);
 
   return (
     <div className="text-2xl sm:text-3xl font-bold animate-typing">

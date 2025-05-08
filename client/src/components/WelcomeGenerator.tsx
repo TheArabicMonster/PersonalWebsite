@@ -38,14 +38,20 @@ export default function WelcomeGenerator() {
     // Simulate API call delay
     setTimeout(() => {
       // Obtenir les messages traduits
-      const messages = getPredefinedMessages();
-      const randomIndex = Math.floor(Math.random() * messages.length);
-      let selectedMessage = messages[randomIndex];
+      const messageKeys = [
+        'welcomeGenerator.message1',
+        'welcomeGenerator.message2',
+        'welcomeGenerator.message3',
+        'welcomeGenerator.message4',
+      ];
       
-      // Replace placeholders with actual values
-      selectedMessage = selectedMessage
-        .replace('[name]', name)
-        .replace('[interest]', interest);
+      const randomKey = messageKeys[Math.floor(Math.random() * messageKeys.length)];
+      
+      // Utiliser la fonction t() avec des paramètres
+      const selectedMessage = t(randomKey, {
+        name: name,
+        interest: interest
+      });
       
       setMessage(selectedMessage);
       setShowMessage(true);
@@ -66,14 +72,10 @@ export default function WelcomeGenerator() {
       await navigator.clipboard.writeText(message);
       setCopied(true);
       
-      // Show toast notification
+      // Utiliser t() pour la notification
       toast({
         title: t('welcomeGenerator'),
-        description: language === 'fr' 
-          ? "Message copié dans le presse-papiers!" 
-          : language === 'ar' 
-            ? "تم نسخ الرسالة إلى الحافظة!" 
-            : "Message copied to clipboard!",
+        description: t('copySuccess'),
       });
       
       // Reset copy icon after 2 seconds
@@ -84,11 +86,7 @@ export default function WelcomeGenerator() {
       console.error("Failed to copy message: ", err);
       toast({
         title: t('welcomeGenerator'),
-        description: language === 'fr' 
-          ? "Échec de la copie du message" 
-          : language === 'ar' 
-            ? "فشل نسخ الرسالة" 
-            : "Failed to copy message",
+        description: t('copyError'),
         variant: "destructive",
       });
     }
