@@ -1,6 +1,7 @@
 import { experiences, education } from "../lib/constants";
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 export default function ExperienceSection() {
   const [sectionRef, isInView] = useIntersectionObserver<HTMLElement>({
@@ -8,13 +9,43 @@ export default function ExperienceSection() {
     rootMargin: "-100px 0px"
   });
   
+  // Parallax effect for scrolling
+  const sectionRefForParallax = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRefForParallax,
+    offset: ["start end", "end start"]
+  });
+  
+  // Transform values for parallax effects
+  const lineOpacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.2, 0.8, 0.8, 0.2]);
+  const timelineDotScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1.2, 0.8]);
+  
   return (
     <section
       id="experience"
       ref={sectionRef}
-      className="py-24 bg-white dark:bg-background"
+      className="py-24 relative overflow-hidden"
     >
-      <div className="container mx-auto px-4 sm:px-6">
+      <div className="absolute inset-0" ref={sectionRefForParallax} aria-hidden="true"></div>
+      
+      {/* Decorative elements */}
+      <motion.div 
+        className="absolute top-1/4 left-0 w-1/2 h-96 rounded-full bg-gradient-to-r from-primary/5 via-primary/0 to-transparent blur-3xl pointer-events-none"
+        style={{ 
+          opacity: useTransform(scrollYProgress, [0, 0.5, 1], [0, 0.15, 0]),
+          x: useTransform(scrollYProgress, [0, 1], ['-50%', '25%'])
+        }}
+      />
+      
+      <motion.div 
+        className="absolute bottom-0 right-0 w-96 h-96 rounded-full bg-secondary/5 blur-3xl pointer-events-none"
+        style={{ 
+          opacity: useTransform(scrollYProgress, [0, 0.5, 1], [0, 0.1, 0.05]),
+          y: useTransform(scrollYProgress, [0, 1], ['25%', '-25%'])
+        }}
+      />
+      
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <div className="mb-12 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
             Expérience <span className="text-primary">professionnelle</span>
@@ -40,22 +71,37 @@ export default function ExperienceSection() {
                 <span className="text-lg opacity-80 font-normal">{experience.company}</span>
               </div>
               
-              <time className="block mb-4 text-sm font-mono text-gray-500 dark:text-gray-400">
+              <motion.time 
+                className="block mb-4 text-sm font-mono text-gray-500 dark:text-gray-400 backdrop-blur-sm bg-white/30 dark:bg-background/30 px-3 py-1 rounded-full inline-block"
+                whileHover={{ scale: 1.05 }}
+              >
                 {experience.period}
-              </time>
+              </motion.time>
               
               <div className="flex flex-col gap-y-2 text-base opacity-80">
                 {experience.responsibilities.map((responsibility, respIndex) => (
-                  <p key={respIndex}>{responsibility}</p>
+                  <p 
+                    key={respIndex}
+                    className="backdrop-blur-sm bg-white/30 dark:bg-background/20 p-3 rounded-lg border border-white/10 dark:border-gray-800/30"
+                  >
+                    {responsibility}
+                  </p>
                 ))}
               </div>
               
               <div className="absolute left-0 sm:left-20 top-7 flex justify-center">
-                <div className="w-6 h-6 bg-primary rounded-full shadow flex items-center justify-center">
+                <motion.div 
+                  className="w-6 h-6 bg-primary rounded-full shadow flex items-center justify-center"
+                  style={{ scale: timelineDotScale }}
+                  whileHover={{ scale: 1.2 }}
+                >
                   <div className="w-3 h-3 bg-white rounded-full"></div>
-                </div>
+                </motion.div>
                 {index < experiences.length - 1 && (
-                  <div className="h-full w-0.5 bg-gray-200 dark:bg-gray-700 absolute top-6 -bottom-6 left-3"></div>
+                  <motion.div 
+                    className="h-full w-0.5 bg-gradient-to-b from-primary/80 via-primary/50 to-primary/30 absolute top-6 -bottom-6 left-3"
+                    style={{ opacity: lineOpacity }}
+                  ></motion.div>
                 )}
               </div>
             </motion.div>
@@ -71,17 +117,18 @@ export default function ExperienceSection() {
             {education.map((edu, index) => (
               <motion.div
                 key={index}
-                className="bg-gray-50 dark:bg-background/60 p-6 rounded-lg mb-6 last:mb-0"
+                className="backdrop-blur-md bg-white/50 dark:bg-background/30 p-6 rounded-lg mb-6 last:mb-0 border border-white/20 dark:border-gray-800/30 shadow-md hover:shadow-lg transition-shadow"
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
+                whileHover={{ y: -3 }}
               >
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
                   <h4 className="font-bold text-xl">{edu.degree}</h4>
-                  <span className="text-sm font-mono text-gray-500 dark:text-gray-400">{edu.period}</span>
+                  <span className="text-sm font-mono text-gray-500 dark:text-gray-400 backdrop-blur-sm bg-white/30 dark:bg-background/40 px-3 py-1 rounded-full inline-block mt-2 md:mt-0">{edu.period}</span>
                 </div>
                 <p className="text-lg opacity-80">{edu.institution}</p>
-                <p className="mt-2 opacity-80">{edu.description}</p>
+                <p className="mt-2 opacity-80 backdrop-blur-sm bg-white/30 dark:bg-background/20 p-3 rounded-lg border border-white/10 dark:border-gray-800/30 mt-3">{edu.description}</p>
               </motion.div>
             ))}
           </div>

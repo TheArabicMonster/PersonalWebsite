@@ -5,6 +5,7 @@ import ScrollProgress from "./components/ScrollProgress";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import BackToTop from "./components/BackToTop";
+import AnimatedBackground from "./components/AnimatedBackground";
 import { useTheme } from "./contexts/ThemeContext";
 import { Toaster } from "./components/ui/toaster";
 
@@ -23,10 +24,11 @@ function App() {
 
   return (
     <div className={`flex flex-col min-h-screen ${theme === 'dark' ? 'dark' : ''}`}>
+      <AnimatedBackground />
       <Header />
       <ScrollProgress />
       
-      <main className="flex-grow">
+      <main className="flex-grow relative z-10">
         <Switch>
           <Route path="/" component={HomePage} />
         </Switch>
