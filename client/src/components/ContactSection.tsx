@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
-import { useLanguage } from "../contexts/LanguageContext";
 import { socialLinks, contactInfo } from "../lib/constants";
 import { motion } from "framer-motion";
 import { useMutation } from "@tanstack/react-query";
@@ -25,16 +24,16 @@ import { Button } from "@/components/ui/button";
 
 const formSchema = z.object({
   name: z.string().min(2, {
-    message: "Name must be at least 2 characters."
+    message: "Le nom doit contenir au moins 2 caractères."
   }),
   email: z.string().email({
-    message: "Please enter a valid email address."
+    message: "Veuillez entrer une adresse e-mail valide."
   }),
   subject: z.string().min(2, {
-    message: "Subject must be at least 2 characters."
+    message: "Le sujet doit contenir au moins 2 caractères."
   }),
   message: z.string().min(10, {
-    message: "Message must be at least 10 characters."
+    message: "Le message doit contenir au moins 10 caractères."
   })
 });
 
@@ -43,7 +42,6 @@ export default function ContactSection() {
     threshold: 0.1,
     rootMargin: "-100px 0px"
   });
-  const { t } = useLanguage();
   const { toast } = useToast();
   
   // Form handling with React Hook Form
@@ -65,15 +63,15 @@ export default function ContactSection() {
     },
     onSuccess: () => {
       toast({
-        title: "Message sent successfully!",
-        description: "Thank you for your message. I'll get back to you soon.",
+        title: "Message envoyé avec succès !",
+        description: "Merci pour votre message. Je vous répondrai bientôt.",
       });
       form.reset();
     },
     onError: (error) => {
       toast({
-        title: "Error sending message",
-        description: error.message || "There was a problem sending your message. Please try again.",
+        title: "Erreur d'envoi",
+        description: error.message || "Un problème est survenu lors de l'envoi de votre message. Veuillez réessayer.",
         variant: "destructive"
       });
     }
@@ -92,11 +90,11 @@ export default function ContactSection() {
       <div className="container mx-auto px-4 sm:px-6">
         <div className="mb-12 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            {t('contact.title').split(' ')[0]} <span className="text-primary">{t('contact.title').split(' ')[1]}</span>
+            Me <span className="text-primary">Contacter</span>
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto"></div>
           <p className="mt-6 text-lg opacity-80 max-w-2xl mx-auto">
-            {t('contact.subtitle')}
+            Vous avez une question ou un projet en tête ? N'hésitez pas à me contacter !
           </p>
         </div>
         
@@ -115,10 +113,10 @@ export default function ContactSection() {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>{t('contact.form.name')}</FormLabel>
+                        <FormLabel>Nom</FormLabel>
                         <FormControl>
                           <Input 
-                            placeholder="Your name" 
+                            placeholder="Votre nom" 
                             {...field} 
                             className="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary bg-white dark:bg-background/80 transition-all"
                           />
@@ -133,11 +131,11 @@ export default function ContactSection() {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>{t('contact.form.email')}</FormLabel>
+                        <FormLabel>Email</FormLabel>
                         <FormControl>
                           <Input 
                             type="email" 
-                            placeholder="Your email" 
+                            placeholder="Votre email" 
                             {...field} 
                             className="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary bg-white dark:bg-background/80 transition-all"
                           />
@@ -152,10 +150,10 @@ export default function ContactSection() {
                     name="subject"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>{t('contact.form.subject')}</FormLabel>
+                        <FormLabel>Sujet</FormLabel>
                         <FormControl>
                           <Input 
-                            placeholder="Subject of your message" 
+                            placeholder="Sujet de votre message" 
                             {...field} 
                             className="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary bg-white dark:bg-background/80 transition-all"
                           />
@@ -170,11 +168,11 @@ export default function ContactSection() {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>{t('contact.form.message')}</FormLabel>
+                        <FormLabel>Message</FormLabel>
                         <FormControl>
                           <Textarea 
                             rows={5} 
-                            placeholder="Your message" 
+                            placeholder="Votre message" 
                             {...field} 
                             className="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary bg-white dark:bg-background/80 transition-all resize-none"
                           />
@@ -194,7 +192,7 @@ export default function ContactSection() {
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   ) : (
                     <>
-                      <span>{t('contact.form.submit')}</span>
+                      <span>Envoyer le message</span>
                       <RectangleEllipsis className="ml-2 h-4 w-4" />
                     </>
                   )}
@@ -210,7 +208,7 @@ export default function ContactSection() {
             transition={{ duration: 0.5 }}
           >
             <div className="bg-white dark:bg-background/80 rounded-xl p-8 shadow-lg h-full">
-              <h3 className="text-2xl font-bold mb-6">{t('contact.info.title')}</h3>
+              <h3 className="text-2xl font-bold mb-6">Coordonnées</h3>
               
               <div className="space-y-6">
                 <div className="flex items-start">
@@ -218,7 +216,7 @@ export default function ContactSection() {
                     <RectangleEllipsis className="h-5 w-5" />
                   </div>
                   <div className="ml-4">
-                    <h4 className="text-lg font-medium">{t('contact.info.email')}</h4>
+                    <h4 className="text-lg font-medium">Email</h4>
                     <a href={`mailto:${contactInfo.email}`} className="text-primary hover:underline">
                       {contactInfo.email}
                     </a>
@@ -230,7 +228,7 @@ export default function ContactSection() {
                     <Phone className="h-5 w-5" />
                   </div>
                   <div className="ml-4">
-                    <h4 className="text-lg font-medium">{t('contact.info.phone')}</h4>
+                    <h4 className="text-lg font-medium">Téléphone</h4>
                     <a href={`tel:${contactInfo.phone.replace(/\D/g, '')}`} className="hover:text-primary">
                       {contactInfo.phone}
                     </a>
@@ -242,13 +240,13 @@ export default function ContactSection() {
                     <MapPin className="h-5 w-5" />
                   </div>
                   <div className="ml-4">
-                    <h4 className="text-lg font-medium">{t('contact.info.location')}</h4>
+                    <h4 className="text-lg font-medium">Localisation</h4>
                     <p>{contactInfo.location}</p>
                   </div>
                 </div>
                 
                 <div className="pt-6">
-                  <h4 className="text-lg font-medium mb-4">{t('contact.info.connect')}</h4>
+                  <h4 className="text-lg font-medium mb-4">Réseaux sociaux</h4>
                   <div className="flex space-x-4">
                     <a
                       href={socialLinks.github}

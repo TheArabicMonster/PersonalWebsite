@@ -1,5 +1,4 @@
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
-import { useLanguage } from "../contexts/LanguageContext";
 import { motion } from "framer-motion";
 import WelcomeGenerator from "./WelcomeGenerator";
 
@@ -8,7 +7,6 @@ export default function WelcomeGeneratorSection() {
     threshold: 0.1,
     rootMargin: "0px 0px -100px 0px"
   });
-  const { t } = useLanguage();
   
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -50,14 +48,14 @@ export default function WelcomeGeneratorSection() {
             variants={itemVariants}
           >
             <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              {t('welcomeGenerator')}
+              Générateur de message de bienvenue
             </span>
           </motion.h2>
           <motion.p 
             className="text-lg opacity-80 max-w-2xl mx-auto"
             variants={itemVariants}
           >
-            {t('welcomeGeneratorDesc')}
+            Obtenez un message de bienvenue personnalisé basé sur votre nom et vos intérêts.
           </motion.p>
         </motion.div>
         

@@ -14,7 +14,7 @@ export default function WelcomeGenerator() {
   const [showMessage, setShowMessage] = useState<boolean>(false);
   const [copied, setCopied] = useState<boolean>(false);
   const { toast } = useToast();
-  const { t, language } = useLanguage();
+  const { language } = useLanguage();
 
   // Simulated predefined messages in different languages
   const predefinedMessages = {
@@ -76,12 +76,8 @@ export default function WelcomeGenerator() {
       
       // Show toast notification
       toast({
-        title: t('welcomeGenerator'),
-        description: language === 'fr' 
-          ? "Message copié dans le presse-papiers!" 
-          : language === 'ar' 
-            ? "تم نسخ الرسالة إلى الحافظة!" 
-            : "Message copied to clipboard!",
+        title: "Générateur de message de bienvenue",
+        description: "Message copié dans le presse-papiers!"
       });
       
       // Reset copy icon after 2 seconds
@@ -91,12 +87,8 @@ export default function WelcomeGenerator() {
     } catch (err) {
       console.error("Failed to copy message: ", err);
       toast({
-        title: t('welcomeGenerator'),
-        description: language === 'fr' 
-          ? "Échec de la copie du message" 
-          : language === 'ar' 
-            ? "فشل نسخ الرسالة" 
-            : "Failed to copy message",
+        title: "Générateur de message de bienvenue",
+        description: "Échec de la copie du message",
         variant: "destructive",
       });
     }
@@ -105,33 +97,33 @@ export default function WelcomeGenerator() {
   return (
     <Card className="w-full max-w-xl mx-auto shadow-lg">
       <CardHeader>
-        <CardTitle className="text-primary text-2xl">{t('welcomeGenerator')}</CardTitle>
-        <CardDescription>{t('welcomeGeneratorDesc')}</CardDescription>
+        <CardTitle className="text-primary text-2xl">Générateur de message de bienvenue</CardTitle>
+        <CardDescription>Obtenez un message de bienvenue personnalisé basé sur votre nom et vos intérêts.</CardDescription>
       </CardHeader>
       <CardContent>
         {!showMessage ? (
           <div className="space-y-4">
             <div>
               <label htmlFor="name" className="block text-sm font-medium mb-1">
-                {t('yourName')}
+                Votre Nom
               </label>
               <Input
                 id="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder={t('enterName')}
+                placeholder="Entrez votre nom"
                 className="w-full"
               />
             </div>
             <div>
               <label htmlFor="interest" className="block text-sm font-medium mb-1">
-                {t('yourInterest')}
+                Votre Centre d'Intérêt
               </label>
               <Input
                 id="interest"
                 value={interest}
                 onChange={(e) => setInterest(e.target.value)}
-                placeholder={t('enterInterest')}
+                placeholder="Ex: Développement Web, IA, Design..."
                 className="w-full"
               />
             </div>
@@ -150,12 +142,12 @@ export default function WelcomeGenerator() {
             className="w-full"
           >
             {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            {t('generateMessage')}
+            Générer le Message
           </Button>
         ) : (
           <div className="flex w-full gap-2">
             <Button variant="outline" onClick={resetForm} className="flex-1">
-              {t('tryAgain')}
+              Réessayer
             </Button>
             <Button 
               className="flex-1" 
@@ -166,7 +158,7 @@ export default function WelcomeGenerator() {
               ) : (
                 <Copy className="mr-2 h-4 w-4" />
               )}
-              {t('copyMessage')}
+              Copier le Message
             </Button>
           </div>
         )}

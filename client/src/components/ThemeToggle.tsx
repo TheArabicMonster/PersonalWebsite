@@ -12,7 +12,6 @@ export default function ThemeToggle({ className }: ThemeToggleProps) {
   // Determine initial theme
   const [currentTheme, setCurrentTheme] = useState<"light" | "dark">("light");
   const { toast } = useToast();
-  const { language } = useLanguage();
 
   // Initialize theme on component mount
   useEffect(() => {
@@ -51,16 +50,8 @@ export default function ThemeToggle({ className }: ThemeToggleProps) {
     setCurrentTheme(newTheme);
     applyTheme(newTheme);
     
-    // Prepare toast message
-    let message = "";
-    
-    if (language === "fr") {
-      message = newTheme === "dark" ? "Thème sombre activé" : "Thème clair activé";
-    } else if (language === "ar") {
-      message = newTheme === "dark" ? "تم تفعيل الوضع الداكن" : "تم تفعيل الوضع الفاتح";
-    } else {
-      message = newTheme === "dark" ? "Dark theme enabled" : "Light theme enabled";
-    }
+    // Message en français
+    const message = newTheme === "dark" ? "Thème sombre activé" : "Thème clair activé";
     
     // Show toast notification
     toast({
@@ -74,7 +65,7 @@ export default function ThemeToggle({ className }: ThemeToggleProps) {
     <Button
       variant="outline"
       size="icon"
-      aria-label="Toggle theme"
+      aria-label="Changer de thème"
       onClick={handleToggleTheme}
       className={`${className} transition-all duration-200 hover:bg-primary/10 hover:text-primary`}
     >

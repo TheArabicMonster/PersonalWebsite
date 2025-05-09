@@ -1,6 +1,5 @@
 import { experiences, education } from "../lib/constants";
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
-import { useLanguage } from "../contexts/LanguageContext";
 import { motion } from "framer-motion";
 
 export default function ExperienceSection() {
@@ -8,7 +7,6 @@ export default function ExperienceSection() {
     threshold: 0.1,
     rootMargin: "-100px 0px"
   });
-  const { t } = useLanguage();
   
   return (
     <section
@@ -19,11 +17,11 @@ export default function ExperienceSection() {
       <div className="container mx-auto px-4 sm:px-6">
         <div className="mb-12 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            {t('experience.title').split(' ')[0]} <span className="text-primary">{t('experience.title').split(' ')[1]}</span>
+            Expérience <span className="text-primary">professionnelle</span>
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto"></div>
           <p className="mt-6 text-lg opacity-80 max-w-2xl mx-auto">
-            {t('experience.subtitle')}
+            Mon parcours professionnel dans l'industrie technologique.
           </p>
         </div>
         
@@ -66,7 +64,7 @@ export default function ExperienceSection() {
         
         <div className="mt-16">
           <h3 className="text-2xl font-bold mb-8 text-center">
-            {t('education.title')}
+            Éducation
           </h3>
           
           <div className="max-w-4xl mx-auto">

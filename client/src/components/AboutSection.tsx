@@ -1,6 +1,5 @@
-import { skills } from "../lib/constants";
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
-import { useLanguage } from "../contexts/LanguageContext";
+import { skills } from "../lib/constants";
 import { motion } from "framer-motion";
 import { Download } from "lucide-react";
 
@@ -9,27 +8,24 @@ export default function AboutSection() {
     threshold: 0.1,
     rootMargin: "-100px 0px"
   });
-  const { t } = useLanguage();
   
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
+        delayChildren: 0.3,
+        staggerChildren: 0.2
       }
     }
   };
   
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { y: 20, opacity: 0 },
     visible: {
-      opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut"
-      }
+      opacity: 1,
+      transition: { duration: 0.5 }
     }
   };
 
@@ -37,12 +33,12 @@ export default function AboutSection() {
     <section
       id="about"
       ref={sectionRef}
-      className="py-24 bg-white dark:bg-background"
+      className="py-24"
     >
       <div className="container mx-auto px-4 sm:px-6">
         <div className="mb-12 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            {t('about.title').split(' ')[0]} <span className="text-primary">{t('about.title').split(' ')[1]}</span>
+            À <span className="text-primary">propos</span>
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto"></div>
         </div>
@@ -56,38 +52,39 @@ export default function AboutSection() {
           <motion.div variants={itemVariants}>
             <div className="relative rounded-lg overflow-hidden aspect-video shadow-xl">
               <img 
-                src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" 
-                alt="Working on code" 
-                className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
+                src="/images/mateen-profile.jpeg" 
+                alt="Mateen Khadama"
+                className="w-full h-full object-cover"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
             </div>
           </motion.div>
           
-          <div className="space-y-6">
+          <div>
             <motion.h3 
-              className="text-2xl font-bold"
+              className="text-2xl font-bold mb-4"
               variants={itemVariants}
             >
-              {t('about.who')}
+              Qui suis-je?
             </motion.h3>
             <motion.p 
               className="text-base sm:text-lg opacity-80 leading-relaxed"
               variants={itemVariants}
             >
-              {t('about.description1')}
+              Je suis un développeur Full Stack passionné par la création de solutions web performantes et élégantes. Avec une expertise en Vue.js, JavaScript et Python, je transforme des idées complexes en applications intuitives et conviviales.
             </motion.p>
             <motion.p 
               className="text-base sm:text-lg opacity-80 leading-relaxed"
               variants={itemVariants}
             >
-              {t('about.description2')}
+              Mon approche combine créativité technique et résolution de problèmes pour développer des solutions sur mesure qui répondent parfaitement aux besoins des utilisateurs et des entreprises.
             </motion.p>
             
             <motion.div 
               className="pt-4"
               variants={itemVariants}
             >
-              <h3 className="text-xl font-bold mb-4">{t('about.skills')}</h3>
+              <h3 className="text-xl font-bold mb-4">Mes compétences techniques</h3>
               <div className="flex flex-wrap gap-3">
                 {skills.map((skill, index) => (
                   <motion.span 
@@ -113,7 +110,7 @@ export default function AboutSection() {
                 className="inline-flex items-center px-6 py-3 border-2 border-primary text-primary hover:bg-primary/10 font-medium rounded-lg transition-all"
               >
                 <Download className="mr-2 h-5 w-5" />
-                {t('resume.download')}
+                Télécharger mon CV
               </a>
             </motion.div>
           </div>

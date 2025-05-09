@@ -1,37 +1,34 @@
+import { useState, useEffect, useRef } from "react";
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
-import TypingAnimation from "./TypingAnimation";
 import { socialLinks } from "../lib/constants";
-import { useLanguage } from "../contexts/LanguageContext";
 import { motion } from "framer-motion";
-import { Github, Linkedin, Twitter, Mail } from "lucide-react";
-import profileImage from "../assets/mateen-profile.jpeg";
+import { ArrowDown, Download, Github, Linkedin, Mail, Twitter } from "lucide-react";
+import TypingAnimation from "./TypingAnimation";
+import { Button } from "./ui/button";
 
 export default function HeroSection() {
   const [sectionRef, isInView] = useIntersectionObserver<HTMLElement>({
     threshold: 0.1,
-    rootMargin: "0px 0px -100px 0px"
+    rootMargin: "-100px 0px"
   });
-  const { t } = useLanguage();
   
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
+        delayChildren: 0.3,
         staggerChildren: 0.2
       }
     }
   };
   
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { y: 20, opacity: 0 },
     visible: {
-      opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut"
-      }
+      opacity: 1,
+      transition: { duration: 0.5 }
     }
   };
 
@@ -39,59 +36,45 @@ export default function HeroSection() {
     <section
       id="home"
       ref={sectionRef}
-      className="min-h-screen relative overflow-hidden flex items-center pt-20"
+      className="min-h-screen flex items-center py-16 bg-gradient-to-b from-background to-background/90"
     >
-      {/* Background gradients */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5"></div>
-        <div className="absolute top-20 right-10 w-96 h-96 bg-secondary/10 rounded-full filter blur-3xl"></div>
-        <div className="absolute bottom-20 left-10 w-96 h-96 bg-primary/10 rounded-full filter blur-3xl"></div>
-      </div>
-      
-      <div className="container mx-auto px-4 sm:px-6 py-16 lg:py-0">
+      <div className="container mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div 
-            className="order-2 lg:order-1"
+            className="order-2 lg:order-1 flex flex-col"
             variants={containerVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
           >
-            <div className="space-y-6">
+            <div>
+              <motion.h2 variants={itemVariants} className="text-xl sm:text-2xl font-medium mb-2 text-primary">
+                Salut 👋, je suis
+              </motion.h2>
+              <motion.h1 variants={itemVariants} className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4">
+                Mateen Khalil
+              </motion.h1>
               <motion.div variants={itemVariants}>
-                <p className="text-lg sm:text-xl font-mono mb-2 text-secondary">
-                  {t('greeting')}
-                </p>
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight">
-                  <span className="text-primary">Mateen</span>
-                </h1>
-                <div className="mt-4 h-14">
-                  <TypingAnimation />
-                </div>
+                <TypingAnimation />
               </motion.div>
-              
-              <motion.p 
-                className="text-lg opacity-80 leading-relaxed max-w-lg"
-                variants={itemVariants}
-              >
-                I craft engaging digital experiences using modern technologies. Turning complex problems into elegant solutions 
-                is what drives my passion for development.
+              <motion.p variants={itemVariants} className="mt-6 text-lg opacity-80 max-w-lg">
+                Développeur full stack passionné avec une expertise en Vue.js, JavaScript et Python. Je crée des expériences web interactives et des solutions digitales innovantes.
               </motion.p>
               
               <motion.div 
-                className="flex flex-wrap gap-4"
+                className="mt-8 flex flex-wrap gap-4"
                 variants={itemVariants}
               >
                 <a 
                   href="#projects" 
-                  className="inline-block px-6 py-3 bg-primary hover:bg-primary/90 text-white font-medium rounded-lg transition-all shadow-md hover:shadow-lg"
+                  className="inline-block px-6 py-3 bg-primary text-primary-foreground hover:bg-primary/90 font-medium rounded-lg transition-all"
                 >
-                  {t('viewWork')}
+                  Voir mes projets
                 </a>
                 <a 
                   href="#contact" 
                   className="inline-block px-6 py-3 border-2 border-primary text-primary hover:bg-primary/10 font-medium rounded-lg transition-all"
                 >
-                  {t('getInTouch')}
+                  Me contacter
                 </a>
               </motion.div>
               
@@ -143,36 +126,31 @@ export default function HeroSection() {
             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
           >
-            <div className="relative w-64 h-64 sm:w-80 sm:h-80 animate-float">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary rounded-full opacity-20 blur-xl transform scale-95"></div>
-              <div className="absolute inset-0 flex items-center justify-center">
+            <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-96 lg:h-96">
+              <div className="absolute inset-0 rounded-full bg-gradient-to-b from-primary to-secondary opacity-20 blur-2xl"></div>
+              <div className="relative w-full h-full overflow-hidden rounded-full border-4 border-primary/20 p-2">
                 <img 
-                  src={profileImage} 
-                  alt="Mateen's profile" 
-                  className="rounded-full w-56 h-56 sm:w-72 sm:h-72 object-cover border-4 border-white dark:border-background shadow-lg"
+                  src="/images/mateen-profile.jpeg" 
+                  alt="Mateen Khadama"
+                  className="w-full h-full object-cover rounded-full"
                 />
               </div>
             </div>
           </motion.div>
         </div>
-      </div>
-      
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce hidden md:block">
-        <a href="#about" className="text-foreground opacity-60 hover:opacity-100 transition-opacity">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+        
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden md:block">
+          <motion.a
+            href="#about"
+            className="flex flex-col items-center text-sm font-medium text-foreground/60 hover:text-primary transition-colors"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1, duration: 0.5 }}
           >
-            <path d="m6 9 6 6 6-6"/>
-          </svg>
-        </a>
+            <span className="mb-2">Défiler</span>
+            <ArrowDown className="h-4 w-4 animate-bounce" />
+          </motion.a>
+        </div>
       </div>
     </section>
   );
