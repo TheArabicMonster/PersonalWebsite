@@ -36,7 +36,7 @@ export default function AboutSection() {
   const categorizedSkills = {
     frontend: ["React", "Vue.js", "JavaScript", "TypeScript", "HTML/CSS", "TailwindCSS", "SASS"],
     backend: ["Python", "Node.js", "Django", "Express", "MongoDB", "PostgreSQL"],
-    tools: ["Git", "Docker", "AWS", "CI/CD", "Jest", "Webpack"]
+    tools: ["Git", "Docker", "Azure", "CI/CD", "Jest"]
   };
 
   const getFilteredSkills = () => {
