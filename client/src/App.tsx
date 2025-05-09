@@ -1,5 +1,4 @@
 import { Switch, Route } from "wouter";
-import { Toaster } from "@/components/ui/toaster";
 import HomePage from "./pages/HomePage";
 import { useEffect } from "react";
 import ScrollProgress from "./components/ScrollProgress";
@@ -7,6 +6,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import BackToTop from "./components/BackToTop";
 import { useTheme } from "./contexts/ThemeContext";
+import { Toaster } from "./components/ui/toaster";
 
 function App() {
   const { theme } = useTheme();

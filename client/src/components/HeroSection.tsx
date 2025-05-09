@@ -130,8 +130,8 @@ export default function HeroSection() {
               <div className="absolute inset-0 rounded-full bg-gradient-to-b from-primary to-secondary opacity-20 blur-2xl"></div>
                 <div className="relative w-full h-full overflow-hidden rounded-full border-4 border-primary/20 p-2">
                   <img 
-                    src="./client/src/img/mateen-profile.jpeg"
-                    alt="Mateen Khadama"
+                    src="/images/mateen-profile.jpeg"
+                    alt="Mateen Khalil"
                     className="w-full h-full object-cover rounded-full"
                   />
                 </div>
