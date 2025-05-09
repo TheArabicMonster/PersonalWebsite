@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import ThemeToggle from "./ThemeToggle";
-import DirectLanguageSwitcher from "./DirectLanguageSwitcher";
 import { navItems } from "../lib/constants";
 import { useLanguage } from "../contexts/LanguageContext";
 import { Menu, X } from "lucide-react";
@@ -82,7 +81,6 @@ export default function Header() {
 
             <div className="flex items-center space-x-4">
               <ThemeToggle />
-              <DirectLanguageSwitcher />
             </div>
           </nav>
         </div>
