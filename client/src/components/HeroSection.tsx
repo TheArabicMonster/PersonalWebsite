@@ -128,13 +128,13 @@ export default function HeroSection() {
           >
             <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-96 lg:h-96">
               <div className="absolute inset-0 rounded-full bg-gradient-to-b from-primary to-secondary opacity-20 blur-2xl"></div>
-              <div className="relative w-full h-full overflow-hidden rounded-full border-4 border-primary/20 p-2">
-                <img 
-                  src="/images/mateen-profile.jpeg" 
-                  alt="Mateen Khadama"
-                  className="w-full h-full object-cover rounded-full"
-                />
-              </div>
+                <div className="relative w-full h-full overflow-hidden rounded-full border-4 border-primary/20 p-2">
+                  <img 
+                    src="./client/src/img/mateen-profile.jpeg"
+                    alt="Mateen Khadama"
+                    className="w-full h-full object-cover rounded-full"
+                  />
+                </div>
             </div>
           </motion.div>
         </div>
