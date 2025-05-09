@@ -65,7 +65,7 @@ export default function ProjectsSection() {
     <section
       id="projects"
       ref={sectionRef}
-      className="py-24 relative overflow-hidden"
+      className="py-24 relative overflow-hidden bg-gradient-to-b from-background/95 to-background dark:from-background/95 dark:to-background"
     >
       <div className="absolute inset-0" ref={sectionRefForParallax} aria-hidden="true"></div>
       
@@ -94,7 +94,7 @@ export default function ProjectsSection() {
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
-              className="backdrop-blur-md bg-white/60 dark:bg-background/40 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow border border-white/30 dark:border-gray-800/30"
+              className="backdrop-blur-md bg-white/60 dark:bg-background/40 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow border border-white/30 dark:border-gray-800/50"
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}

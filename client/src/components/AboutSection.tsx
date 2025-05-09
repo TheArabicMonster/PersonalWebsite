@@ -68,7 +68,7 @@ export default function AboutSection() {
     <section
       id="about"
       ref={sectionRef}
-      className="py-24 relative overflow-hidden"
+      className="py-24 relative overflow-hidden bg-gradient-to-b from-background to-background/95 dark:from-background dark:to-background/95"
     >
       <div className="absolute inset-0" ref={sectionRefForParallax} aria-hidden="true"></div>
       
@@ -99,7 +99,7 @@ export default function AboutSection() {
               <div className="absolute -left-4 -top-4 w-24 h-24 bg-primary/10 rounded-full filter blur-xl"></div>
               <div className="absolute -right-10 -bottom-10 w-32 h-32 bg-secondary/10 rounded-full filter blur-xl"></div>
               
-              <div className="relative z-10 backdrop-blur-md bg-white/60 dark:bg-background/40 p-8 rounded-2xl shadow-xl border border-white/30 dark:border-gray-800/30 overflow-hidden">
+              <div className="relative z-10 backdrop-blur-md bg-white/60 dark:bg-background/40 p-8 rounded-2xl shadow-xl border border-white/30 dark:border-gray-800/50 overflow-hidden">
                 <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-primary/5 to-secondary/10 rounded-full transform translate-x-16 -translate-y-16"></div>
                 
                 <h3 className="text-2xl font-bold mb-6 flex items-center">
@@ -151,7 +151,7 @@ export default function AboutSection() {
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 h-full">
                 {/* Carte 1 */}
-                <div className="bg-gradient-to-br from-primary/5 to-primary/10 dark:from-primary/10 dark:to-primary/5 p-6 rounded-2xl shadow-md border border-white/60 dark:border-gray-800/30 backdrop-blur-md flex flex-col">
+                <div className="bg-gradient-to-br from-primary/5 to-primary/10 dark:from-primary/10 dark:to-primary/5 p-6 rounded-2xl shadow-md border border-white/60 dark:border-gray-800/50 backdrop-blur-md flex flex-col">
                   <div className="bg-white/70 dark:bg-gray-800/50 p-3 rounded-full w-12 h-12 flex items-center justify-center mb-4 shadow-md">
                     <Monitor className="h-6 w-6 text-primary" />
                   </div>
@@ -169,7 +169,7 @@ export default function AboutSection() {
                 </div>
                 
                 {/* Carte 2 */}
-                <div className="bg-gradient-to-br from-secondary/5 to-secondary/10 dark:from-secondary/10 dark:to-secondary/5 p-6 rounded-2xl shadow-md border border-white/60 dark:border-gray-800/30 backdrop-blur-md flex flex-col">
+                <div className="bg-gradient-to-br from-secondary/5 to-secondary/10 dark:from-secondary/10 dark:to-secondary/5 p-6 rounded-2xl shadow-md border border-white/60 dark:border-gray-800/50 backdrop-blur-md flex flex-col">
                   <div className="bg-white/70 dark:bg-gray-800/50 p-3 rounded-full w-12 h-12 flex items-center justify-center mb-4 shadow-md">
                     <Database className="h-6 w-6 text-secondary" />
                   </div>
@@ -188,7 +188,7 @@ export default function AboutSection() {
                 
                 {/* Carte 3 */}
                 <motion.div 
-                  className="sm:col-span-2 bg-gradient-to-r from-primary/5 via-transparent to-secondary/5 dark:from-primary/10 dark:via-transparent dark:to-secondary/10 p-6 rounded-2xl shadow-md border border-white/60 dark:border-gray-800/30 backdrop-blur-md"
+                  className="sm:col-span-2 bg-gradient-to-r from-primary/5 via-transparent to-secondary/5 dark:from-primary/10 dark:via-transparent dark:to-secondary/10 p-6 rounded-2xl shadow-md border border-white/60 dark:border-gray-800/50 backdrop-blur-md"
                   style={{ y: y2, rotate: rotate2 }}
                 >
                   <div className="flex items-center mb-4">
@@ -226,7 +226,7 @@ export default function AboutSection() {
           
           {/* Section compétences avec filtres */}
           <motion.div 
-            className="mt-16 bg-white/60 dark:bg-background/40 backdrop-blur-md rounded-2xl p-8 shadow-lg border border-white/30 dark:border-gray-800/30"
+            className="mt-16 bg-white/60 dark:bg-background/40 backdrop-blur-md rounded-2xl p-8 shadow-lg border border-white/30 dark:border-gray-800/50"
             variants={itemVariants}
           >
             <h3 className="text-2xl font-bold mb-6 flex items-center">
@@ -247,7 +247,7 @@ export default function AboutSection() {
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                     activeCategory === key 
                       ? "bg-primary text-white shadow-md" 
-                      : "bg-white/70 dark:bg-background/70 hover:bg-white/90 dark:hover:bg-background/50 backdrop-blur-sm border border-white/30 dark:border-gray-800/30"
+                      : "bg-white/70 dark:bg-background/70 hover:bg-white/90 dark:hover:bg-background/50 backdrop-blur-sm border border-white/30 dark:border-gray-800/50"
                   }`}
                 >
                   {label}

@@ -24,13 +24,13 @@ export default function ExperienceSection() {
     <section
       id="experience"
       ref={sectionRef}
-      className="py-24 relative overflow-hidden"
+      className="py-24 relative overflow-hidden bg-gradient-to-b from-background to-background/95 dark:from-background dark:to-background/95"
     >
       <div className="absolute inset-0" ref={sectionRefForParallax} aria-hidden="true"></div>
       
-      {/* Decorative elements */}
+      {/* Decorative elements with consistent appearance in dark mode */}
       <motion.div 
-        className="absolute top-1/4 left-0 w-1/2 h-96 rounded-full bg-gradient-to-r from-primary/5 via-primary/0 to-transparent blur-3xl pointer-events-none"
+        className="absolute top-1/4 left-0 w-1/2 h-96 rounded-full bg-gradient-to-r from-primary/5 via-primary/0 to-transparent dark:from-primary/10 dark:via-primary/5 dark:to-transparent blur-3xl pointer-events-none"
         style={{ 
           opacity: useTransform(scrollYProgress, [0, 0.5, 1], [0, 0.15, 0]),
           x: useTransform(scrollYProgress, [0, 1], ['-50%', '25%'])
@@ -38,7 +38,7 @@ export default function ExperienceSection() {
       />
       
       <motion.div 
-        className="absolute bottom-0 right-0 w-96 h-96 rounded-full bg-secondary/5 blur-3xl pointer-events-none"
+        className="absolute bottom-0 right-0 w-96 h-96 rounded-full bg-secondary/5 dark:bg-secondary/10 blur-3xl pointer-events-none"
         style={{ 
           opacity: useTransform(scrollYProgress, [0, 0.5, 1], [0, 0.1, 0.05]),
           y: useTransform(scrollYProgress, [0, 1], ['25%', '-25%'])
@@ -72,7 +72,7 @@ export default function ExperienceSection() {
               </div>
               
               <motion.time 
-                className="block mb-4 text-sm font-mono text-gray-500 dark:text-gray-400 backdrop-blur-sm bg-white/30 dark:bg-background/30 px-3 py-1 rounded-full inline-block"
+                className="block mb-4 text-sm font-mono text-gray-500 dark:text-gray-400 backdrop-blur-sm bg-white/30 dark:bg-background/50 px-3 py-1 rounded-full inline-block"
                 whileHover={{ scale: 1.05 }}
               >
                 {experience.period}
@@ -82,7 +82,7 @@ export default function ExperienceSection() {
                 {experience.responsibilities.map((responsibility, respIndex) => (
                   <p 
                     key={respIndex}
-                    className="backdrop-blur-sm bg-white/30 dark:bg-background/20 p-3 rounded-lg border border-white/10 dark:border-gray-800/30"
+                    className="backdrop-blur-sm bg-white/30 dark:bg-background/40 p-3 rounded-lg border border-white/10 dark:border-gray-800/50"
                   >
                     {responsibility}
                   </p>
@@ -117,7 +117,7 @@ export default function ExperienceSection() {
             {education.map((edu, index) => (
               <motion.div
                 key={index}
-                className="backdrop-blur-md bg-white/50 dark:bg-background/30 p-6 rounded-lg mb-6 last:mb-0 border border-white/20 dark:border-gray-800/30 shadow-md hover:shadow-lg transition-shadow"
+                className="backdrop-blur-md bg-white/50 dark:bg-background/40 p-6 rounded-lg mb-6 last:mb-0 border border-white/20 dark:border-gray-800/50 shadow-md hover:shadow-lg transition-shadow"
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
@@ -128,7 +128,7 @@ export default function ExperienceSection() {
                   <span className="text-sm font-mono text-gray-500 dark:text-gray-400 backdrop-blur-sm bg-white/30 dark:bg-background/40 px-3 py-1 rounded-full inline-block mt-2 md:mt-0">{edu.period}</span>
                 </div>
                 <p className="text-lg opacity-80">{edu.institution}</p>
-                <p className="mt-2 opacity-80 backdrop-blur-sm bg-white/30 dark:bg-background/20 p-3 rounded-lg border border-white/10 dark:border-gray-800/30 mt-3">{edu.description}</p>
+                <p className="mt-2 opacity-80 backdrop-blur-sm bg-white/30 dark:bg-background/40 p-3 rounded-lg border border-white/10 dark:border-gray-800/50 mt-3">{edu.description}</p>
               </motion.div>
             ))}
           </div>

@@ -85,7 +85,7 @@ export default function ContactSection() {
     <section
       id="contact"
       ref={sectionRef}
-      className="py-24 relative overflow-hidden"
+      className="py-24 relative overflow-hidden bg-gradient-to-b from-background/95 to-background dark:from-background/95 dark:to-background"
     >
       <div className="container mx-auto px-4 sm:px-6">
         <div className="mb-12 text-center">
@@ -105,7 +105,7 @@ export default function ContactSection() {
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="bg-white/80 dark:bg-background/60 backdrop-blur-md rounded-xl p-8 shadow-lg border border-white/20 dark:border-gray-800/30">
+            <div className="bg-white/80 dark:bg-background/60 backdrop-blur-md rounded-xl p-8 shadow-lg border border-white/20 dark:border-gray-800/50">
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                   <div className="space-y-4">
@@ -217,14 +217,14 @@ export default function ContactSection() {
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="bg-gradient-to-br from-slate-800 to-gray-900 dark:from-slate-800 dark:to-gray-900 from-blue-100 to-blue-200 text-slate-900 dark:text-white rounded-2xl p-8 shadow-xl h-full relative overflow-hidden">
+            <div className="bg-gradient-to-br from-slate-800 to-gray-900 dark:from-slate-800 dark:to-gray-900 text-white rounded-2xl p-8 shadow-xl h-full relative overflow-hidden">
               {/* Decorative elements */}
               <div className="absolute top-0 right-0 w-60 h-60 rounded-full bg-primary/20 opacity-10 transform translate-x-1/3 -translate-y-1/3"></div>
               <div className="absolute bottom-0 left-0 w-40 h-40 rounded-full bg-blue-700/30 opacity-10 transform -translate-x-1/2 translate-y-1/2"></div>
               <div className="absolute top-1/2 left-1/2 w-32 h-32 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-blue-600/10 to-indigo-600/10 rounded-full blur-xl"></div>
               
               <div className="relative z-10">
-                <h3 className="text-2xl font-bold mb-8 border-b border-slate-900/20 dark:border-white/20 pb-4">Coordonnées</h3>
+                <h3 className="text-2xl font-bold mb-8 border-b border-white/20 pb-4">Coordonnées</h3>
                 
                 <div className="space-y-6">
                   <motion.div 
@@ -236,7 +236,7 @@ export default function ContactSection() {
                     </div>
                     <div className="ml-4">
                       <h4 className="text-lg font-medium opacity-80">Email</h4>
-                      <a href={`mailto:${contactInfo.email}`} className="hover:underline transition-colors hover:text-blue-700 dark:hover:text-blue-300">
+                      <a href={`mailto:${contactInfo.email}`} className="hover:underline transition-colors hover:text-blue-300">
                         {contactInfo.email}
                       </a>
                     </div>
@@ -251,7 +251,7 @@ export default function ContactSection() {
                     </div>
                     <div className="ml-4">
                       <h4 className="text-lg font-medium opacity-80">Téléphone</h4>
-                      <a href={`tel:${contactInfo.phone.replace(/\D/g, '')}`} className="hover:underline transition-colors hover:text-blue-700 dark:hover:text-blue-300">
+                      <a href={`tel:${contactInfo.phone.replace(/\D/g, '')}`} className="hover:underline transition-colors hover:text-blue-300">
                         {contactInfo.phone}
                       </a>
                     </div>
@@ -266,11 +266,11 @@ export default function ContactSection() {
                     </div>
                     <div className="ml-4">
                       <h4 className="text-lg font-medium opacity-80">Localisation</h4>
-                      <p className="text-gray-800 dark:text-gray-200">{contactInfo.location}</p>
+                      <p className="text-gray-200">{contactInfo.location}</p>
                     </div>
                   </motion.div>
                   
-                  <div className="pt-6 mt-6 border-t border-slate-900/20 dark:border-white/20">
+                  <div className="pt-6 mt-6 border-t border-white/20">
                     <h4 className="text-lg font-medium mb-4 opacity-80">Suivez-moi</h4>
                     <div className="flex space-x-3">
                       <motion.a
