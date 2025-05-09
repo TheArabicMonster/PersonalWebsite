@@ -63,7 +63,7 @@ export default function ExperienceSection() {
               className="relative pl-8 sm:pl-32 py-6 group"
               initial={{ opacity: 0, x: -20 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.7, delay: index * 0.1 }}
             >
               <div className="font-bold text-xl mb-1 group-hover:text-primary transition-colors flex flex-col sm:flex-row sm:items-center">
                 <span>{experience.title}</span>
