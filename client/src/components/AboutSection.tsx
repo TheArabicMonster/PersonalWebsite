@@ -44,75 +44,69 @@ export default function AboutSection() {
         </div>
         
         <motion.div 
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
+          className="flex flex-col gap-8"
         >
-          <motion.div variants={itemVariants}>
-            <div className="relative rounded-lg overflow-hidden aspect-video shadow-xl">
-              <img 
-                src="/images/mateen-profile.jpeg" 
-                alt="Mateen Khadama"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-            </div>
-          </motion.div>
-          
-          <div>
-            <motion.h3 
-              className="text-2xl font-bold mb-4"
-              variants={itemVariants}
-            >
-              Qui suis-je?
-            </motion.h3>
-            <motion.p 
-              className="text-base sm:text-lg opacity-80 leading-relaxed"
-              variants={itemVariants}
-            >
-              Je suis un développeur Full Stack passionné par la création de solutions web performantes et élégantes. Avec une expertise en Vue.js, JavaScript et Python, je transforme des idées complexes en applications intuitives et conviviales.
-            </motion.p>
-            <motion.p 
-              className="text-base sm:text-lg opacity-80 leading-relaxed"
-              variants={itemVariants}
-            >
-              Mon approche combine créativité technique et résolution de problèmes pour développer des solutions sur mesure qui répondent parfaitement aux besoins des utilisateurs et des entreprises.
-            </motion.p>
-            
-            <motion.div 
-              className="pt-4"
-              variants={itemVariants}
-            >
-              <h3 className="text-xl font-bold mb-4">Mes compétences techniques</h3>
-              <div className="flex flex-wrap gap-3">
-                {skills.map((skill, index) => (
-                  <motion.span 
-                    key={index}
-                    className="px-4 py-2 bg-gray-100 dark:bg-background/20 rounded-full text-sm font-medium"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-                    transition={{ duration: 0.4, delay: index * 0.05 }}
-                  >
-                    {skill}
-                  </motion.span>
-                ))}
-              </div>
-            </motion.div>
-            
-            <motion.div 
-              className="pt-6"
-              variants={itemVariants}
-            >
-              <a 
-                href="/resume.pdf" 
-                target="_blank" 
-                className="inline-flex items-center px-6 py-3 border-2 border-primary text-primary hover:bg-primary/10 font-medium rounded-lg transition-all"
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Partie description */}
+            <div className="md:col-span-1">
+              <motion.h3 
+                className="text-2xl font-bold mb-4"
+                variants={itemVariants}
               >
-                <Download className="mr-2 h-5 w-5" />
-                Télécharger mon CV
-              </a>
-            </motion.div>
+                Qui suis-je?
+              </motion.h3>
+              <motion.p 
+                className="text-base sm:text-lg opacity-80 leading-relaxed mb-4"
+                variants={itemVariants}
+              >
+                Je suis un développeur Full Stack passionné par la création de solutions web performantes et élégantes. Avec une expertise en Vue.js, JavaScript et Python, je transforme des idées complexes en applications intuitives et conviviales.
+              </motion.p>
+              <motion.p 
+                className="text-base sm:text-lg opacity-80 leading-relaxed"
+                variants={itemVariants}
+              >
+                Mon approche combine créativité technique et résolution de problèmes pour développer des solutions sur mesure qui répondent parfaitement aux besoins des utilisateurs et des entreprises.
+              </motion.p>
+            </div>
+            
+            {/* Partie compétences */}
+            <div className="md:col-span-2">
+              <motion.div 
+                className="mb-8"
+                variants={itemVariants}
+              >
+                <h3 className="text-xl font-bold mb-4">Mes compétences techniques</h3>
+                <div className="flex flex-wrap gap-3">
+                  {skills.map((skill, index) => (
+                    <motion.span 
+                      key={index}
+                      className="px-4 py-2 bg-gray-100 dark:bg-background/20 rounded-full text-sm font-medium"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                      transition={{ duration: 0.4, delay: index * 0.05 }}
+                    >
+                      {skill}
+                    </motion.span>
+                  ))}
+                </div>
+              </motion.div>
+              
+              <motion.div 
+                variants={itemVariants}
+              >
+                <a 
+                  href="/resume.pdf" 
+                  target="_blank" 
+                  className="inline-flex items-center px-6 py-3 border-2 border-primary text-primary hover:bg-primary/10 font-medium rounded-lg transition-all"
+                >
+                  <Download className="mr-2 h-5 w-5" />
+                  Télécharger mon CV
+                </a>
+              </motion.div>
+            </div>
           </div>
         </motion.div>
       </div>
