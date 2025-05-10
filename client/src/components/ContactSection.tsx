@@ -104,9 +104,9 @@ export default function ContactSection() {
             className="order-2 lg:order-1 lg:col-span-3"
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <div className="relative bg-gradient-to-br from-white via-primary/5 to-secondary/10 dark:from-[#181c24] dark:via-[#23283a]/80 dark:to-[#181c24] dark:bg-none backdrop-blur-xl rounded-2xl p-10 shadow-2xl border border-white/40 dark:border-gray-800/60 overflow-hidden transition-colors duration-300">
+            <div className="relative bg-white dark:bg-card backdrop-blur-md rounded-2xl p-8 shadow-xl border border-border overflow-hidden transition-colors duration-300">
               {/* Déco gradient animée */}
               {theme !== 'dark' && (
                 <motion.div
@@ -138,10 +138,10 @@ export default function ContactSection() {
                               <Input
                                 {...field}
                                 placeholder="Votre nom"
-                                className="w-full px-4 py-3 rounded-xl border-2 border-white/60 dark:border-blue-400 focus:border-primary focus:ring-2 focus:ring-primary/20 bg-white/80 dark:bg-background/80 transition-all placeholder-gray-500 dark:placeholder-gray-400 shadow focus:shadow-primary/10 dark:focus:shadow-primary/20 backdrop-blur-md"
+                                className="w-full px-4 py-3 rounded-xl border border-input bg-background transition-all placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-background"
                               />
                             </FormControl>
-                            <FormMessage className="text-xs text-red-500 dark:text-red-400" />
+                            <FormMessage />
                           </FormItem>
                         )}
                       />
@@ -160,10 +160,10 @@ export default function ContactSection() {
                                 {...field}
                                 type="email"
                                 placeholder="Votre email"
-                                className="w-full px-4 py-3 rounded-xl border-2 border-white/60 dark:border-blue-400 focus:border-primary focus:ring-2 focus:ring-primary/20 bg-white/80 dark:bg-background/80 transition-all placeholder-gray-500 dark:placeholder-gray-400 shadow focus:shadow-primary/10 dark:focus:shadow-primary/20 backdrop-blur-md"
+                                className="w-full px-4 py-3 rounded-xl border border-input bg-background transition-all placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-background"
                               />
                             </FormControl>
-                            <FormMessage className="text-xs text-red-500 dark:text-red-400" />
+                            <FormMessage />
                           </FormItem>
                         )}
                       />
@@ -182,10 +182,10 @@ export default function ContactSection() {
                             <Input
                               {...field}
                               placeholder="Sujet de votre message"
-                              className="w-full px-4 py-3 rounded-xl border-2 border-white/60 dark:border-blue-400 focus:border-primary focus:ring-2 focus:ring-primary/20 bg-white/80 dark:bg-background/80 transition-all placeholder-gray-500 dark:placeholder-gray-400 shadow focus:shadow-primary/10 dark:focus:shadow-primary/20 backdrop-blur-md"
+                              className="w-full px-4 py-3 rounded-xl border border-input bg-background transition-all placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-background"
                             />
                           </FormControl>
-                          <FormMessage className="text-xs text-red-500 dark:text-red-400" />
+                          <FormMessage />
                         </FormItem>
                       )}
                     />
@@ -204,10 +204,10 @@ export default function ContactSection() {
                               {...field}
                               rows={5}
                               placeholder="Votre message..."
-                              className="w-full px-4 py-3 rounded-xl border-2 border-white/60 dark:border-blue-400 focus:border-primary focus:ring-2 focus:ring-primary/20 bg-white/80 dark:bg-background/80 transition-all resize-none placeholder-gray-500 dark:placeholder-gray-400 shadow focus:shadow-primary/10 dark:focus:shadow-primary/20 backdrop-blur-md"
+                              className="w-full px-4 py-3 rounded-xl border border-input bg-background transition-all resize-none placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-background"
                             />
                           </FormControl>
-                          <FormMessage className="text-xs text-red-500 dark:text-red-400" />
+                          <FormMessage />
                         </FormItem>
                       )}
                     />
@@ -220,7 +220,7 @@ export default function ContactSection() {
                       <Button
                         type="submit"
                         disabled={mutation.isPending}
-                        className="w-full py-4 rounded-xl bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white font-bold text-lg shadow-lg transition-all flex items-center justify-center gap-2 tracking-wide border-2 border-white/60 dark:border-blue-700"
+                        className="w-full py-4 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-lg shadow-md transition-all flex items-center justify-center gap-2 tracking-wide"
                       >
                         {mutation.isPending ? (
                           <Loader2 className="mr-2 h-5 w-5 animate-spin" />
