@@ -215,9 +215,9 @@ export default function ContactSection() {
             className="order-1 lg:order-2 lg:col-span-2"
             initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <div className="bg-gradient-to-br from-slate-800 to-gray-900 dark:from-slate-800 dark:to-gray-900 text-white rounded-2xl p-8 shadow-xl h-full relative overflow-hidden">
+            <div className="bg-white text-foreground border-gray-200/60 dark:bg-gray-900/90 dark:text-white dark:border-gray-800/60 rounded-lg shadow-lg border p-8 h-full relative overflow-hidden backdrop-blur-sm transition-colors duration-300">
               {/* Decorative elements */}
               <div className="absolute top-0 right-0 w-60 h-60 rounded-full bg-primary/20 opacity-10 transform translate-x-1/3 -translate-y-1/3"></div>
               <div className="absolute bottom-0 left-0 w-40 h-40 rounded-full bg-blue-700/30 opacity-10 transform -translate-x-1/2 translate-y-1/2"></div>
@@ -266,7 +266,7 @@ export default function ContactSection() {
                     </div>
                     <div className="ml-4">
                       <h4 className="text-lg font-medium opacity-80">Localisation</h4>
-                      <p className="text-gray-200">{contactInfo.location}</p>
+                      <p className="hover:underline transition-colors hover:text-blue-300">{contactInfo.location}</p>
                     </div>
                   </motion.div>
                   
