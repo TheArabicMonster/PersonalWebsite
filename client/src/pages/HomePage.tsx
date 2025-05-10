@@ -5,6 +5,7 @@ import ExperienceSection from "../components/ExperienceSection";
 import ContactSection from "../components/ContactSection";
 import WelcomeGeneratorSection from "../components/WelcomeGeneratorSection";
 import EducationSection from "../components/EducationSection"; 
+import InteractivePlaygroundSection from "../components/InteractivePlaygroundSection"; // Import the new InteractivePlaygroundSection component
 
 export default function HomePage() {
   return (
@@ -15,6 +16,7 @@ export default function HomePage() {
       <ExperienceSection />
       <EducationSection /> 
       <WelcomeGeneratorSection />
+      <InteractivePlaygroundSection />
       <ContactSection />
     </>
   );

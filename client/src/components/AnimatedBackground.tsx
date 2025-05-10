@@ -1,10 +1,13 @@
 import { useEffect, useState, useRef } from "react";
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
+import Particles, { initParticlesEngine } from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
 
 export default function AnimatedBackground() {
   const [windowHeight, setWindowHeight] = useState(0);
   const [windowWidth, setWindowWidth] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [init, setInit] = useState(false);
   
   // Mouse tracking
   const mouseX = useMotionValue(0);
@@ -42,6 +45,16 @@ export default function AnimatedBackground() {
       window.removeEventListener('mousemove', handleMouseMove);
     };
   }, [mouseX, mouseY]);
+
+  useEffect(() => {
+    const initParticles = async () => {
+      await initParticlesEngine(async (engine) => {
+        await loadSlim(engine);
+      });
+      setInit(true);
+    };
+    initParticles();
+  }, []);
   
   // Transform values based on scroll
   const y1 = useTransform(scrollYProgress, [0, 1], [0, windowHeight * 0.5]);
@@ -64,12 +77,80 @@ export default function AnimatedBackground() {
   
   // Hue rotation for subtle color shifts
   const hueRotate = useTransform(scrollYProgress, [0, 0.5, 1], [0, 10, 0]);
+
+  // Parallax for particles
+  const particlesParallaxY = useTransform(scrollYProgress, [0, 1], [0, -windowHeight * 0.65]);
   
   return (
     <div 
       ref={containerRef}
       className="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none"
+      style={{ minHeight: "100vh" }}
     >
+      {/* Particles global background with parallax */}
+      {init && (
+        <motion.div
+          style={{
+            y: particlesParallaxY,
+            position: "fixed",
+            inset: 0,
+            width: "100vw",
+            height: "100vh",
+            zIndex: 0,
+            pointerEvents: "none",
+          }}
+        >
+          <Particles
+            id="tsparticles-global"
+            options={{
+              fullScreen: { enable: false },
+              fpsLimit: 60,
+              particles: {
+                color: { value: "#ffffff" },
+                links: {
+                  color: { value: "#ffffff" },
+                  distance: 130,
+                  enable: true,
+                  opacity: 0.35,
+                  width: 1.2,
+                },
+                move: {
+                  enable: true,
+                  speed: { min: 0.2, max: 1.5 },
+                },
+                opacity: { value: { min: 0.25, max: 0.7 } },
+                size: { value: { min: 2, max: 4 } },
+                number: {
+                  value: 120,
+                  density: {
+                    enable: true,
+                  } as any,
+                },
+              },
+              interactivity: {
+                detect_on: "window",
+                events: {
+                  onHover: { enable: true, mode: "grab" },
+                  onClick: { enable: true, mode: "push" },
+                },
+                modes: {
+                  grab: { distance: 180, links: { opacity: 0.7 } },
+                  push: { quantity: 4 },
+                },
+              },
+              detectRetina: true,
+            }}
+            style={{
+              position: "fixed",
+              inset: 0,
+              width: "100vw",
+              height: "100vh",
+              zIndex: 0,
+              pointerEvents: "none",
+            }}
+          />
+        </motion.div>
+      )}
       {/* Base gradient background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background to-background/90 dark:from-background/90 dark:to-background z-0" />
       
