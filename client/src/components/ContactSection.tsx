@@ -43,6 +43,7 @@ export default function ContactSection() {
     rootMargin: "-100px 0px"
   });
   const { toast } = useToast();
+  const { theme } = useTheme();
   
   // Form handling with React Hook Form
   const form = useForm<z.infer<typeof formSchema>>({
@@ -105,109 +106,135 @@ export default function ContactSection() {
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="bg-white/80 dark:bg-background/60 backdrop-blur-md rounded-xl p-8 shadow-lg border border-white/20 dark:border-gray-800/50">
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                  <div className="space-y-4">
-                    <FormField
-                      control={form.control}
-                      name="name"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="font-medium">Nom</FormLabel>
-                          <div className="relative">
+            <div className="relative bg-gradient-to-br from-white via-primary/5 to-secondary/10 dark:from-[#181c24] dark:via-[#23283a]/80 dark:to-[#181c24] dark:bg-none backdrop-blur-xl rounded-2xl p-10 shadow-2xl border border-white/40 dark:border-gray-800/60 overflow-hidden transition-colors duration-300">
+              {/* Déco gradient animée */}
+              {theme !== 'dark' && (
+                <motion.div
+                  className="absolute -top-10 -left-10 w-40 h-40 rounded-full bg-gradient-to-br from-primary/20 to-secondary/10 blur-2xl opacity-40"
+                  animate={{ scale: [1, 1.1, 1] }}
+                  transition={{ duration: 8, repeat: Infinity }}
+                />
+              )}
+              <motion.div
+                className="absolute bottom-0 right-0 w-32 h-32 rounded-full bg-gradient-to-tr from-secondary/20 to-primary/10 dark:from-secondary/10 dark:to-primary/10 blur-2xl opacity-30"
+                animate={{ scale: [1, 1.08, 1] }}
+                transition={{ duration: 7, repeat: Infinity }}
+              />
+              <div className="relative z-10">
+                <Form {...form}>
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-7">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {/* Nom */}
+                      <FormField
+                        control={form.control}
+                        name="name"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="font-semibold flex items-center gap-2 text-primary dark:text-primary">
+                              <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"/><path d="M12 14c-4.418 0-8 1.79-8 4v2h16v-2c0-2.21-3.582-4-8-4Z"/></svg>
+                              Nom
+                            </FormLabel>
                             <FormControl>
-                              <Input 
-                                placeholder="Votre nom" 
-                                {...field} 
-                                className="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary bg-white/50 dark:bg-background/40 transition-all border-gray-200 dark:border-gray-700"
+                              <Input
+                                {...field}
+                                placeholder="Votre nom"
+                                className="w-full px-4 py-3 rounded-xl border-2 border-white/60 dark:border-blue-400 focus:border-primary focus:ring-2 focus:ring-primary/20 bg-white/80 dark:bg-background/80 transition-all placeholder-gray-500 dark:placeholder-gray-400 shadow focus:shadow-primary/10 dark:focus:shadow-primary/20 backdrop-blur-md"
                               />
                             </FormControl>
-                          </div>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="font-medium">Email</FormLabel>
-                          <div className="relative">
+                            <FormMessage className="text-xs text-red-500 dark:text-red-400" />
+                          </FormItem>
+                        )}
+                      />
+                      {/* Email */}
+                      <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="font-semibold flex items-center gap-2 text-primary dark:text-primary">
+                              <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2"/><path d="m22 5-10 7L2 5"/></svg>
+                              Email
+                            </FormLabel>
                             <FormControl>
-                              <Input 
-                                type="email" 
-                                placeholder="Votre email" 
-                                {...field} 
-                                className="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary bg-white/50 dark:bg-background/40 transition-all border-gray-200 dark:border-gray-700"
+                              <Input
+                                {...field}
+                                type="email"
+                                placeholder="Votre email"
+                                className="w-full px-4 py-3 rounded-xl border-2 border-white/60 dark:border-blue-400 focus:border-primary focus:ring-2 focus:ring-primary/20 bg-white/80 dark:bg-background/80 transition-all placeholder-gray-500 dark:placeholder-gray-400 shadow focus:shadow-primary/10 dark:focus:shadow-primary/20 backdrop-blur-md"
                               />
                             </FormControl>
-                          </div>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    
+                            <FormMessage className="text-xs text-red-500 dark:text-red-400" />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+                    {/* Sujet */}
                     <FormField
                       control={form.control}
                       name="subject"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="font-medium">Sujet</FormLabel>
-                          <div className="relative">
-                            <FormControl>
-                              <Input 
-                                placeholder="Sujet de votre message" 
-                                {...field} 
-                                className="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary bg-white/50 dark:bg-background/40 transition-all border-gray-200 dark:border-gray-700"
-                              />
-                            </FormControl>
-                          </div>
-                          <FormMessage />
+                          <FormLabel className="font-semibold flex items-center gap-2 text-primary dark:text-primary">
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M4 7V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2"/><rect width="20" height="14" x="2" y="7" rx="2"/></svg>
+                            Sujet
+                          </FormLabel>
+                          <FormControl>
+                            <Input
+                              {...field}
+                              placeholder="Sujet de votre message"
+                              className="w-full px-4 py-3 rounded-xl border-2 border-white/60 dark:border-blue-400 focus:border-primary focus:ring-2 focus:ring-primary/20 bg-white/80 dark:bg-background/80 transition-all placeholder-gray-500 dark:placeholder-gray-400 shadow focus:shadow-primary/10 dark:focus:shadow-primary/20 backdrop-blur-md"
+                            />
+                          </FormControl>
+                          <FormMessage className="text-xs text-red-500 dark:text-red-400" />
                         </FormItem>
                       )}
                     />
-                    
+                    {/* Message */}
                     <FormField
                       control={form.control}
                       name="message"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="font-medium">Message</FormLabel>
-                          <div className="relative">
-                            <FormControl>
-                              <Textarea 
-                                rows={5} 
-                                placeholder="Votre message" 
-                                {...field} 
-                                className="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary bg-white/50 dark:bg-background/40 transition-all resize-none border-gray-200 dark:border-gray-700"
-                              />
-                            </FormControl>
-                          </div>
-                          <FormMessage />
+                          <FormLabel className="font-semibold flex items-center gap-2 text-primary dark:text-primary">
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2"/><path d="m8 10 4 4 4-4"/></svg>
+                            Message
+                          </FormLabel>
+                          <FormControl>
+                            <Textarea
+                              {...field}
+                              rows={5}
+                              placeholder="Votre message..."
+                              className="w-full px-4 py-3 rounded-xl border-2 border-white/60 dark:border-blue-400 focus:border-primary focus:ring-2 focus:ring-primary/20 bg-white/80 dark:bg-background/80 transition-all resize-none placeholder-gray-500 dark:placeholder-gray-400 shadow focus:shadow-primary/10 dark:focus:shadow-primary/20 backdrop-blur-md"
+                            />
+                          </FormControl>
+                          <FormMessage className="text-xs text-red-500 dark:text-red-400" />
                         </FormItem>
                       )}
                     />
-                  </div>
-                  
-                  <Button 
-                    type="submit" 
-                    disabled={mutation.isPending}
-                    className="w-full px-6 py-3 bg-gradient-to-r from-primary to-primary hover:from-primary/90 hover:to-primary text-white font-medium rounded-lg transition-all shadow-md hover:shadow-lg flex items-center justify-center"
-                  >
-                    {mutation.isPending ? (
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    ) : (
-                      <>
-                        <span>Envoyer le message</span>
-                        <RectangleEllipsis className="ml-2 h-5 w-5" />
-                      </>
-                    )}
-                  </Button>
-                </form>
-              </Form>
+                    {/* Bouton d'envoi */}
+                    <motion.div
+                      whileHover={{ scale: 1.04 }}
+                      whileTap={{ scale: 0.97 }}
+                      className="pt-2"
+                    >
+                      <Button
+                        type="submit"
+                        disabled={mutation.isPending}
+                        className="w-full py-4 rounded-xl bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white font-bold text-lg shadow-lg transition-all flex items-center justify-center gap-2 tracking-wide border-2 border-white/60 dark:border-blue-700"
+                      >
+                        {mutation.isPending ? (
+                          <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                        ) : (
+                          <>
+                            Envoyer
+                            <svg className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                          </>
+                        )}
+                      </Button>
+                    </motion.div>
+                  </form>
+                </Form>
+              </div>
             </div>
           </motion.div>
           
