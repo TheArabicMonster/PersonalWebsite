@@ -135,10 +135,10 @@ export default function AnimatedBackground() {
       />
       
       {/* Grid overlay effect - Différent pour chaque thème */}
-      <div className="absolute inset-0 bg-[url('/images/grid.svg')] bg-center opacity-[0.07] z-10 dark:hidden" />
+      <div className="absolute inset-0 bg-[url('/images/grid.svg')] bg-center opacity-[0.2] z-10 dark:hidden" />
       
       {/* Grille blanche visible uniquement en mode sombre */}
-      <div className="absolute inset-0 bg-[url('/images/dark/grid-white.svg')] bg-center opacity-[0.25] z-10 hidden dark:block" />
+      <div className="absolute inset-0 bg-[url('/images/dark/grid-white.svg')] bg-center opacity-[0.2] z-[5] hidden dark:block" />
       
       {/* Dynamic light beam effect */}
       <motion.div 

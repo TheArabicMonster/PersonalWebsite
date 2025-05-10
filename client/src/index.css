@@ -77,18 +77,18 @@
   html.dark,
   html[data-theme="dark"],
   :root[data-theme="dark"],
-  .dark {
+  .dark { /* This rule applies to <html> */
     color-scheme: dark !important;
-    background-color: hsl(222.2, 47.4%, 11.2%) !important;
-    color: hsl(210, 40%, 98%) !important;
+    background-color: transparent !important; /* Changed from hsl(var(--background)) */
+    color: hsl(var(--foreground)) !important;
   }
   
   /* Specific overrides for dark mode */
   html.dark body,
   html[data-theme="dark"] body,
   .dark body {
-    background-color: hsl(222.2, 47.4%, 11.2%) !important;
-    color: hsl(210, 40%, 98%) !important;
+    background-color: transparent !important; /* Changed from hsl(var(--background)) */
+    color: hsl(var(--foreground)) !important;
   }
   
   html.dark .bg-background,
@@ -108,7 +108,8 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply text-foreground font-sans antialiased;
+    background-color: transparent; /* Ensure body is transparent */
     overflow-x: hidden;
   }
 }
