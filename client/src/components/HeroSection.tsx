@@ -42,7 +42,7 @@ export default function HeroSection() {
     <section
       id="home"
       ref={sectionRef}
-      className="min-h-screen flex items-center py-16 relative overflow-hidden"
+      className="min-h-screen flex items-center py-16 relative"
     >
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
