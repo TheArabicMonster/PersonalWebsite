@@ -86,7 +86,7 @@ export default function ContactSection() {
     <section
       id="contact"
       ref={sectionRef}
-      className="py-24 relative overflow-hidden bg-gradient-to-b from-background/95 to-background dark:from-background/95 dark:to-background"
+      className="py-24 relative overflow-visible bg-transparent"
     >
       <div className="container mx-auto px-4 sm:px-6">
         <div className="mb-12 text-center">

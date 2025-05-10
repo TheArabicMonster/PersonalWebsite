@@ -65,7 +65,7 @@ export default function ProjectsSection() {
     <section
       id="projects"
       ref={sectionRef}
-      className="py-24 relative overflow-hidden bg-gradient-to-b from-background/95 to-background dark:from-background/95 dark:to-background"
+      className="py-24 relative overflow-visible bg-transparent"
     >
       <div className="absolute inset-0" ref={sectionRefForParallax} aria-hidden="true"></div>
       
