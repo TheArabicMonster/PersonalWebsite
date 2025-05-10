@@ -34,7 +34,7 @@ export default function WelcomeGeneratorSection() {
     <section 
       id="welcome-generator" 
       ref={sectionRef} 
-      className="py-24 relative overflow-visible bg-transparent"
+      className="py-24 relative overflow-visible bg-transparent dark:bg-transparent"
     >
       <div className="container mx-auto px-4 sm:px-6">
         <motion.div

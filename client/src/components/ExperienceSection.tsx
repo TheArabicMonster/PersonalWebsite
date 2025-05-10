@@ -25,7 +25,7 @@ export default function ExperienceSection() {
     <section
       id="experience"
       ref={sectionRef}
-      className="py-24 relative overflow-visible bg-transparent"
+      className="py-24 relative overflow-visible bg-transparent dark:bg-transparent"
     >
       <div className="absolute inset-0" ref={sectionRefForParallax} aria-hidden="true"></div>
       
