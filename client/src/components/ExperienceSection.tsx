@@ -57,56 +57,46 @@ export default function ExperienceSection() {
           </p>
         </div>
         
-        <div className="max-w-4xl mx-auto">
-          {experiences.map((experience, index) => (
-            <motion.div
-              key={index}
-              className="relative pl-8 sm:pl-32 py-6 group"
-              initial={{ opacity: 0, x: -20 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-              transition={{ duration: 0.7, delay: index * 0.1 }}
-            >
-              <div className="font-bold text-xl mb-1 group-hover:text-primary transition-colors flex flex-col sm:flex-row sm:items-center">
-                <span>{experience.title}</span>
-                <span className="hidden sm:block px-2 text-gray-400">•</span>
-                <span className="text-lg opacity-80 font-normal">{experience.company}</span>
-              </div>
-              
-              <motion.time 
-                className="block mb-4 text-sm font-mono text-gray-500 dark:text-gray-400 backdrop-blur-sm bg-white/30 dark:bg-background/50 px-3 py-1 rounded-full inline-block"
-                whileHover={{ scale: 1.05 }}
+        <div className="max-w-3xl mx-auto relative">
+          {/* Nouvelle timeline verticale adaptée au projet */}
+          <div className="absolute left-8 top-0 bottom-0 flex flex-col items-center z-0 w-0.5">
+            <div className="h-full w-full bg-gradient-to-b from-primary via-secondary/60 to-primary/30 rounded-full shadow-md" />
+          </div>
+          <div className="flex flex-col gap-14">
+            {experiences.map((experience, index) => (
+              <motion.div
+                key={index}
+                className="relative flex group"
+                initial={{ opacity: 0, y: 40 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+                transition={{ duration: 0.7, delay: index * 0.13 }}
               >
-                {experience.period}
-              </motion.time>
-              
-              <div className="flex flex-col gap-y-2 text-base opacity-80">
-                {experience.responsibilities.map((responsibility, respIndex) => (
-                  <p 
-                    key={respIndex}
-                    className="backdrop-blur-sm bg-white/30 dark:bg-background/40 p-3 rounded-lg border border-white/10 dark:border-gray-800/50"
-                  >
-                    {responsibility}
-                  </p>
-                ))}
-              </div>
-              
-              <div className="absolute left-0 sm:left-20 top-7 flex justify-center">
-                <motion.div 
-                  className="w-6 h-6 bg-primary rounded-full shadow flex items-center justify-center"
-                  style={{ scale: timelineDotScale }}
-                  whileHover={{ scale: 1.2 }}
-                >
-                  <div className="w-3 h-3 bg-white rounded-full"></div>
-                </motion.div>
-                {index < experiences.length - 1 && (
-                  <motion.div 
-                    className="h-full w-0.5 bg-gradient-to-b from-primary/80 via-primary/50 to-primary/30 absolute top-6 -bottom-6 left-3"
-                    style={{ opacity: lineOpacity }}
-                  ></motion.div>
-                )}
-              </div>
-            </motion.div>
-          ))}
+                {/* Dot animé sur la timeline */}
+                <div className="z-10 flex flex-col items-center mr-8 min-w-[2.5rem]">
+                  <motion.div
+                    className="w-5 h-5 rounded-full bg-gradient-to-br from-primary to-secondary border-4 border-white dark:border-background shadow-lg transition-transform duration-200 group-hover:scale-125"
+                    initial={{ scale: 0.8, opacity: 0.8 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.4, delay: 0.1 + index * 0.13 }}
+                  />
+                </div>
+                {/* Carte expérience */}
+                <div className="flex-1 bg-white/90 dark:bg-background/70 rounded-2xl shadow-lg border border-white/30 dark:border-gray-800/50 p-6 group-hover:shadow-2xl transition-all">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
+                    <div className="font-bold text-lg text-primary">{experience.title}</div>
+                    <span className="hidden sm:block px-2 text-gray-400">•</span>
+                    <div className="text-base text-gray-700 dark:text-gray-300 font-medium">{experience.company}</div>
+                  </div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400 mb-2">{experience.period}</div>
+                  <ul className="list-disc pl-5 space-y-1 text-base opacity-90">
+                    {experience.responsibilities.map((responsibility, respIndex) => (
+                      <li key={respIndex}>{responsibility}</li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
         
         <div className="mt-24">
