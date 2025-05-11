@@ -56,13 +56,34 @@ export default function AboutSection() {
     }
   };
   
+  // Animation améliorée pour les sections/cartes
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
+    hidden: (i: number) => ({
+      opacity: 0,
+      scale: 0.7,
+      x: [
+        -120, // carte 0 (gauche)
+        120,  // carte 1 (droite)
+        0     // carte 2 (milieu ou en bas)
+      ][i] || (i % 2 === 0 ? -100 : 100),
+      y: -80 + i * 30 + (Math.random() - 0.5) * 40,
+      rotate: (i % 2 === 0 ? -1 : 1) * (18 + i * 6),
+      filter: 'blur(4px)'
+    }),
+    visible: (i: number) => ({
       opacity: 1,
-      transition: { duration: 0.5 }
-    }
+      scale: 1,
+      x: 0,
+      y: 0,
+      rotate: 0,
+      filter: 'blur(0px)',
+      transition: {
+        type: "spring",
+        stiffness: 60,
+        damping: 16,
+        delay: i * 0.18
+      }
+    })
   };
 
   return (
@@ -94,8 +115,8 @@ export default function AboutSection() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <motion.div 
               className="relative"
+              custom={0}
               variants={itemVariants}
-              style={{ x: x1, rotate: rotate1 }}
             >
               <div className="absolute -left-4 -top-4 w-24 h-24 bg-primary/10 rounded-full filter blur-xl"></div>
               <div className="absolute -right-10 -bottom-10 w-32 h-32 bg-secondary/10 rounded-full filter blur-xl"></div>
@@ -146,6 +167,7 @@ export default function AboutSection() {
             </motion.div>
             
             <motion.div 
+              custom={1}
               variants={itemVariants}
               style={{ x: x2, y: y1 }}
             >
@@ -189,7 +211,7 @@ export default function AboutSection() {
                 {/* Carte 3 */}
                 <motion.div 
                   className="sm:col-span-2 bg-gradient-to-r from-primary/5 via-transparent to-secondary/5 dark:from-primary/10 dark:via-transparent dark:to-secondary/10 p-6 rounded-2xl shadow-md border border-white/60 dark:border-gray-800/50 backdrop-blur-md"
-                  style={{ y: y2, rotate: rotate2 }}
+                  style={{ y: y2 }}
                 >
                   <div className="flex items-center mb-4">
                     <div className="bg-white/70 dark:bg-gray-800/50 p-3 rounded-full w-12 h-12 flex items-center justify-center shadow-md mr-4">
@@ -227,6 +249,7 @@ export default function AboutSection() {
           {/* Section compétences avec filtres */}
           <motion.div 
             className="mt-16 bg-white/60 dark:bg-background/40 backdrop-blur-md rounded-2xl p-8 shadow-lg border border-white/30 dark:border-gray-800/50"
+            custom={2}
             variants={itemVariants}
           >
             <h3 className="text-2xl font-bold mb-6 flex items-center">
