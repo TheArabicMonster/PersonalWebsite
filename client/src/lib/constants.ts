@@ -1,17 +1,17 @@
 export const navItems = [
-  { id: "home", label: "Home", labelFr: "Accueil", labelAr: "الرئيسية" },
-  { id: "about", label: "About", labelFr: "À propos", labelAr: "حول" },
-  { id: "projects", label: "Projects", labelFr: "Projets", labelAr: "مشاريع" },
-  { id: "experience", label: "Experience", labelFr: "Expérience", labelAr: "خبرة" },
-  { id: "welcome-generator", label: "Welcome Generator", labelFr: "Générateur de Message", labelAr: "مولد الترحيب" },
-  { id: "contact", label: "Contact", labelFr: "Contact", labelAr: "اتصل بنا" }
+  { id: "home", label: "Accueil" },
+  { id: "about", label: "À propos" },
+  { id: "projects", label: "Projets" },
+  { id: "experience", label: "Expérience" },
+  { id: "welcome-generator", label: "Générateur de Message" },
+  { id: "contact", label: "Contact" }
 ];
 
 export const typingPhrases = [
-  { en: "Full Stack Developer", fr: "Développeur Full Stack", ar: "مطور ويب شامل" },
-  { en: "Vue.js Developer", fr: "Développeur Vue.js", ar: "مطور Vue.js" },
-  { en: "Problem Solver", fr: "Solutionneur de problèmes", ar: "حلال المشاكل" },
-  { en: "Tech Explorer", fr: "Explorateur technologique", ar: "مستكشف التكنولوجيا" }
+  "Développeur Full Stack",
+  "Développeur Vue.js",
+  "Solutionneur de problèmes",
+  "Explorateur technologique"
 ];
 
 export const skills = [
@@ -108,11 +108,11 @@ export const socialLinks = {
   linkedin: "https://linkedin.com/in/nomade-dev",
   twitter: "https://twitter.com/nomade_dev",
   dribbble: "https://dribbble.com/nomade_dev",
-  email: "mateen@nomade-dev.com"
+  email: "contact@mateenk.ch"
 };
 
 export const contactInfo = {
-  email: "mateen@nomade-dev.com",
-  phone: "+41 (76) 123-4567",
-  location: "Lausanne, Suisse"
+  email: "contact@mateenk.ch",
+  phone: "+41 79 135 83 33",
+  location: "Nyon, Suisse"
 };

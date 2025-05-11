@@ -16,7 +16,6 @@ export default function HomePage() {
       <ExperienceSection />
       <EducationSection /> 
       <WelcomeGeneratorSection />
-      <InteractivePlaygroundSection />
       <ContactSection />
     </>
   );

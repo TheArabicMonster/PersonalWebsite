@@ -71,5 +71,25 @@ app.use((req, res, next) => {
   
   server.listen(serverOptions, () => {
     log(`serving on port ${port} on ${isWindows ? "localhost" : "0.0.0.0"}`);
+    
+    // Afficher les URLs accessibles pour faciliter le partage
+    if (!isWindows) {
+      const networkInterfaces = os.networkInterfaces();
+      log("\nVotre site est accessible aux URLs suivantes:");
+      log(`➜ Local:   http://localhost:${port}`);
+      
+      // Trouver les adresses IP externes
+      Object.keys(networkInterfaces).forEach((interfaceName) => {
+        const interfaces = networkInterfaces[interfaceName];
+        if (interfaces) {
+          interfaces.forEach((iface) => {
+            // Filtrer les IPv4 et exclure les interfaces de loopback
+            if (iface.family === 'IPv4' && !iface.internal) {
+              log(`➜ Réseau: http://${iface.address}:${port}`);
+            }
+          });
+        }
+      });
+    }
   });
 })();
