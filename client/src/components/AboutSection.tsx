@@ -1,7 +1,7 @@
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 import { skills } from "../lib/constants";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Download, Code, Layers, Database, Monitor, Palette } from "lucide-react";
+import { Download, Code, Layers, Database, Monitor, Palette, X } from "lucide-react";
 import { useState, useRef } from "react";
 
 export default function AboutSection() {
@@ -25,6 +25,7 @@ export default function AboutSection() {
   const rotate2 = useTransform(scrollYProgress, [0, 1], [7, -4]);
   
   const [activeCategory, setActiveCategory] = useState("all");
+  const [showCvModal, setShowCvModal] = useState(false); // État pour contrôler la visibilité du modal CV
   
   const skillCategories = {
     "all": "Toutes",
@@ -126,14 +127,13 @@ export default function AboutSection() {
                 </motion.div>
                 
                 <motion.div className="mt-8 flex flex-wrap gap-4" variants={itemVariants}>
-                  <a 
-                    href="/CV_MatKhalil.pdf" 
-                    download="CV_MatKhalil.pdf"
+                  <button 
+                    onClick={() => setShowCvModal(true)} 
                     className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary to-primary text-white font-medium rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
                   >
                     <Download className="mr-2 h-5 w-5" />
                     Télécharger mon CV
-                  </a>
+                  </button>
                   
                   <a 
                     href="#contact" 
@@ -272,6 +272,45 @@ export default function AboutSection() {
           </motion.div>
         </motion.div>
       </div>
+
+      {/* Modal pour la prévisualisation du CV */}
+      {showCvModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            className="bg-white dark:bg-background p-4 sm:p-6 rounded-lg shadow-xl w-full max-w-4xl h-[90vh] flex flex-col relative"
+          >
+            <div className="flex justify-between items-center mb-3 sm:mb-4">
+              <h4 className="text-lg sm:text-xl font-bold text-gray-800 dark:text-gray-100">Mon CV</h4>
+              <div className="flex gap-2">
+                <a 
+                  href="/CV_MatKhalil.pdf" 
+                  download="CV_MatKhalil.pdf"
+                  className="text-primary hover:text-primary-dark p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors flex items-center gap-1"
+                  aria-label="Télécharger le CV"
+                >
+                  <Download size={20} /> 
+                  <span className="text-sm">Télécharger</span>
+                </a>
+                <button 
+                  onClick={() => setShowCvModal(false)} 
+                  className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                  aria-label="Fermer la prévisualisation du CV"
+                >
+                  <X size={24} />
+                </button>
+              </div>
+            </div>
+            <iframe 
+              src="/CV_MatKhalil.pdf" 
+              className="w-full h-full border-0 rounded bg-white"
+              title="CV de Mat Khalil"
+            />
+          </motion.div>
+        </div>
+      )}
     </section>
   );
 }

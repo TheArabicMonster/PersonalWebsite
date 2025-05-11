@@ -5,6 +5,7 @@ import "./index.css";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient";
+import { pdfjs } from 'react-pdf';
 
 // Fonction pour obtenir les paramètres de l'URL
 function getUrlParams() {
@@ -41,6 +42,12 @@ const initializeTheme = () => {
 
 // Initialisation avant le rendu de React
 initializeTheme();
+
+// Configuration globale du worker pour react-pdf
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.js',
+  import.meta.url,
+).toString();
 
 // Root component that applies theme on mount
 const Root = () => {
