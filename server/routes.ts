@@ -2,6 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertContactMessageSchema } from "@shared/schema";
+import { sendContactEmail } from "./email";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // API routes
@@ -19,6 +20,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Store the contact message
       const contactMessage = await storage.createContactMessage(result.data);
+      
+      // Envoyer un email avec les données du formulaire
+      try {
+        await sendContactEmail({
+          name: result.data.name,
+          email: result.data.email,
+          subject: result.data.subject || "Contact via le site web",
+          message: result.data.message,
+        });
+        console.log("Email envoyé avec succès");
+      } catch (emailError) {
+        console.error("Erreur lors de l'envoi de l'email:", emailError);
+        // On continue même si l'envoi d'email échoue
+      }
       
       return res.status(201).json({ 
         message: "Message sent successfully", 
