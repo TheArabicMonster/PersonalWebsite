@@ -128,7 +128,7 @@ export default function AboutSection() {
                 <motion.div className="mt-8 flex flex-wrap gap-4" variants={itemVariants}>
                   <a 
                     href="/CV_MatKhalil.pdf" 
-                    target="_blank" 
+                    download="CV_MatKhalil.pdf"
                     className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary to-primary text-white font-medium rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
                   >
                     <Download className="mr-2 h-5 w-5" />
