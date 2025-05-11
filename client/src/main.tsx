@@ -7,14 +7,6 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient";
 import { pdfjs } from 'react-pdf';
 
-// Fonction pour obtenir les paramètres de l'URL
-function getUrlParams() {
-  const params = new URLSearchParams(window.location.search);
-  return {
-    lang: params.get("lang"),
-  };
-}
-
 // Initialize theme from localStorage or system preference before React loads
 const initializeTheme = () => {
   const savedTheme = localStorage.getItem("theme");
