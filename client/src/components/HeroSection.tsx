@@ -129,18 +129,20 @@ export default function HeroSection() {
           
           <motion.div 
             className="order-1 lg:order-2 flex justify-center lg:justify-end"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-            transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
+            initial={{ opacity: 0, scale: 0.98 }} // Scale moins extrême
+            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.98 }}
+            transition={{ duration: 0.3, ease: "easeOut", delay: 0.1 }} // Délai et durée réduits
             style={{ y: y2, opacity: opacity1 }}
           >
             <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-96 lg:h-96">
               <div className="absolute inset-0 rounded-full bg-gradient-to-b from-primary to-secondary opacity-20 blur-2xl"></div>
                 <div className="relative w-full h-full overflow-hidden rounded-full border-4 border-white/20 dark:border-primary/20 p-2 backdrop-blur-sm bg-white/30 dark:bg-background/10">
                   <img 
-                    src="/images/mateen-profile.jpeg"
+                    src="/optimized-images/mateen-profile.webp"
                     alt="Mateen Khalil"
                     className="w-full h-full object-cover rounded-full"
+                    loading="eager" // Forcer le chargement prioritaire
+                    fetchPriority="high" // Indique au navigateur que c'est une priorité élevée
                   />
                 </div>
             </div>
