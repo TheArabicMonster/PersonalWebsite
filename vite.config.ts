@@ -3,9 +3,15 @@ import react from "@vitejs/plugin-react";
 import themePlugin from "@replit/vite-plugin-shadcn-theme-json";
 import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
+import viteCompression from 'vite-plugin-compression';
 
 export default defineConfig({
   plugins: [
+    viteCompression({
+      algorithm: 'brotliCompress',
+      ext: '.br',
+      threshold: 10240,
+    }),
     react(),
     runtimeErrorOverlay(),
     themePlugin(),
