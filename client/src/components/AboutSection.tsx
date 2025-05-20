@@ -92,7 +92,9 @@ export default function AboutSection() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <motion.div 
               className="relative"
-              variants={itemVariants}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
               style={{ x: x1, rotate: rotate1 }}
             >
               <div className="absolute -left-4 -top-4 w-24 h-24 bg-primary/10 rounded-full filter blur-xl"></div>
@@ -145,88 +147,107 @@ export default function AboutSection() {
             </motion.div>
             
             <motion.div 
-              variants={itemVariants}
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
               style={{ x: x2, y: y1 }}
+              className="grid grid-cols-1 sm:grid-cols-2 gap-6 h-full"
             >
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 h-full">
-                {/* Carte 1 */}
-                <div className="bg-gradient-to-br from-primary/5 to-primary/10 dark:from-primary/10 dark:to-primary/5 p-6 rounded-2xl shadow-md border border-white/60 dark:border-gray-800/50 backdrop-blur-md flex flex-col">
-                  <div className="bg-white/70 dark:bg-gray-800/50 p-3 rounded-full w-12 h-12 flex items-center justify-center mb-4 shadow-md">
-                    <Monitor className="h-6 w-6 text-primary" />
+              {/* Carte 1 - Frontend */}
+              <motion.div 
+                className="bg-gradient-to-br from-primary/5 to-primary/10 dark:from-primary/10 dark:to-primary/5 p-6 rounded-2xl shadow-md border border-white/60 dark:border-gray-800/50 backdrop-blur-md flex flex-col"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.4, delay: 0.3 }}
+                whileHover={{ scale: 1.03, boxShadow: "0 4px 20px rgba(0,0,0,0.1)" }}
+              >
+                <div className="bg-white/70 dark:bg-gray-800/50 p-3 rounded-full w-12 h-12 flex items-center justify-center mb-4 shadow-md">
+                  <Monitor className="h-6 w-6 text-primary" />
+                </div>
+                <h4 className="text-xl font-bold mb-2">Frontend</h4>
+                <p className="text-sm opacity-75 mb-4 flex-grow">
+                  Création d'interfaces modernes, réactives et accessibles avec les technologies les plus récentes.
+                </p>
+                <div className="flex flex-wrap gap-2 mt-auto">
+                  {categorizedSkills.frontend.slice(0, 3).map((skill, i) => (
+                    <span key={i} className="px-2 py-1 bg-white/50 dark:bg-gray-800/50 text-xs rounded-md">
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+              
+              {/* Carte 2 - Backend */}
+              <motion.div 
+                className="bg-gradient-to-br from-secondary/5 to-secondary/10 dark:from-secondary/10 dark:to-secondary/5 p-6 rounded-2xl shadow-md border border-white/60 dark:border-gray-800/50 backdrop-blur-md flex flex-col"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.4, delay: 0.4 }}
+                whileHover={{ scale: 1.03, boxShadow: "0 4px 20px rgba(0,0,0,0.1)" }}
+              >
+                <div className="bg-white/70 dark:bg-gray-800/50 p-3 rounded-full w-12 h-12 flex items-center justify-center mb-4 shadow-md">
+                  <Database className="h-6 w-6 text-secondary" />
+                </div>
+                <h4 className="text-xl font-bold mb-2">Backend</h4>
+                <p className="text-sm opacity-75 mb-4 flex-grow">
+                  Construction de systèmes backend robustes, évolutifs et performants pour soutenir vos applications.
+                </p>
+                <div className="flex flex-wrap gap-2 mt-auto">
+                  {categorizedSkills.backend.slice(0, 3).map((skill, i) => (
+                    <span key={i} className="px-2 py-1 bg-white/50 dark:bg-gray-800/50 text-xs rounded-md">
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+              
+              {/* Carte 3 - Approche */}
+              <motion.div 
+                className="sm:col-span-2 bg-gradient-to-r from-primary/5 via-transparent to-secondary/5 dark:from-primary/10 dark:via-transparent dark:to-secondary/10 p-6 rounded-2xl shadow-md border border-white/60 dark:border-gray-800/50 backdrop-blur-md"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.4, delay: 0.5 }}
+                whileHover={{ scale: 1.03, boxShadow: "0 4px 20px rgba(0,0,0,0.1)" }}
+                style={{ y: y2, rotate: rotate2 }}
+              >
+                <div className="flex items-center mb-4">
+                  <div className="bg-white/70 dark:bg-gray-800/50 p-3 rounded-full w-12 h-12 flex items-center justify-center shadow-md mr-4">
+                    <Layers className="h-6 w-6 text-primary" />
                   </div>
-                  <h4 className="text-xl font-bold mb-2">Frontend</h4>
-                  <p className="text-sm opacity-75 mb-4 flex-grow">
-                    Création d'interfaces modernes, réactives et accessibles avec les technologies les plus récentes.
-                  </p>
-                  <div className="flex flex-wrap gap-2 mt-auto">
-                    {categorizedSkills.frontend.slice(0, 3).map((skill, i) => (
-                      <span key={i} className="px-2 py-1 bg-white/50 dark:bg-gray-800/50 text-xs rounded-md">
-                        {skill}
-                      </span>
-                    ))}
+                  <div>
+                    <h4 className="text-xl font-bold">Approche</h4>
+                    <p className="text-sm opacity-75">Méthodologie basée sur la qualité et l'innovation</p>
                   </div>
                 </div>
                 
-                {/* Carte 2 */}
-                <div className="bg-gradient-to-br from-secondary/5 to-secondary/10 dark:from-secondary/10 dark:to-secondary/5 p-6 rounded-2xl shadow-md border border-white/60 dark:border-gray-800/50 backdrop-blur-md flex flex-col">
-                  <div className="bg-white/70 dark:bg-gray-800/50 p-3 rounded-full w-12 h-12 flex items-center justify-center mb-4 shadow-md">
-                    <Database className="h-6 w-6 text-secondary" />
+                <div className="grid grid-cols-2 gap-3 mt-4">
+                  <div className="flex items-center">
+                    <div className="w-2 h-2 rounded-full bg-primary mr-2"></div>
+                    <span className="text-sm">Architecture scalable</span>
                   </div>
-                  <h4 className="text-xl font-bold mb-2">Backend</h4>
-                  <p className="text-sm opacity-75 mb-4 flex-grow">
-                    Construction de systèmes backend robustes, évolutifs et performants pour soutenir vos applications.
-                  </p>
-                  <div className="flex flex-wrap gap-2 mt-auto">
-                    {categorizedSkills.backend.slice(0, 3).map((skill, i) => (
-                      <span key={i} className="px-2 py-1 bg-white/50 dark:bg-gray-800/50 text-xs rounded-md">
-                        {skill}
-                      </span>
-                    ))}
+                  <div className="flex items-center">
+                    <div className="w-2 h-2 rounded-full bg-primary mr-2"></div>
+                    <span className="text-sm">Tests automatisés</span>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="w-2 h-2 rounded-full bg-primary mr-2"></div>
+                    <span className="text-sm">Design centré utilisateur</span>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="w-2 h-2 rounded-full bg-primary mr-2"></div>
+                    <span className="text-sm">Performance optimisée</span>
                   </div>
                 </div>
-                
-                {/* Carte 3 */}
-                <motion.div 
-                  className="sm:col-span-2 bg-gradient-to-r from-primary/5 via-transparent to-secondary/5 dark:from-primary/10 dark:via-transparent dark:to-secondary/10 p-6 rounded-2xl shadow-md border border-white/60 dark:border-gray-800/50 backdrop-blur-md"
-                  style={{ y: y2, rotate: rotate2 }}
-                >
-                  <div className="flex items-center mb-4">
-                    <div className="bg-white/70 dark:bg-gray-800/50 p-3 rounded-full w-12 h-12 flex items-center justify-center shadow-md mr-4">
-                      <Layers className="h-6 w-6 text-primary" />
-                    </div>
-                    <div>
-                      <h4 className="text-xl font-bold">Approche</h4>
-                      <p className="text-sm opacity-75">Méthodologie basée sur la qualité et l'innovation</p>
-                    </div>
-                  </div>
-                  
-                  <div className="grid grid-cols-2 gap-3 mt-4">
-                    <div className="flex items-center">
-                      <div className="w-2 h-2 rounded-full bg-primary mr-2"></div>
-                      <span className="text-sm">Architecture scalable</span>
-                    </div>
-                    <div className="flex items-center">
-                      <div className="w-2 h-2 rounded-full bg-primary mr-2"></div>
-                      <span className="text-sm">Tests automatisés</span>
-                    </div>
-                    <div className="flex items-center">
-                      <div className="w-2 h-2 rounded-full bg-primary mr-2"></div>
-                      <span className="text-sm">Design centré utilisateur</span>
-                    </div>
-                    <div className="flex items-center">
-                      <div className="w-2 h-2 rounded-full bg-primary mr-2"></div>
-                      <span className="text-sm">Performance optimisée</span>
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
+              </motion.div>
             </motion.div>
           </div>
           
           {/* Section compétences avec filtres */}
           <motion.div 
             className="mt-16 bg-white/60 dark:bg-background/40 backdrop-blur-md rounded-2xl p-8 shadow-lg border border-white/30 dark:border-gray-800/50"
-            variants={itemVariants}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.4, delay: 0.6 }}
           >
             <h3 className="text-2xl font-bold mb-6 flex items-center">
               <div className="relative mr-4">
