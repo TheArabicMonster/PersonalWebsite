@@ -16,13 +16,12 @@ export default function AboutSection() {
     offset: ["start end", "end start"]
   });
   
-  // Parallax effect values
-  const x1 = useTransform(scrollYProgress, [0, 1], [-10, 20]);
-  const x2 = useTransform(scrollYProgress, [0, 1], [20, -20]);
-  const y1 = useTransform(scrollYProgress, [0, 1], [-10, 40]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [30, -10]);
-  const rotate1 = useTransform(scrollYProgress, [0, 1], [6, -2]);
-  const rotate2 = useTransform(scrollYProgress, [0, 1], [7, -4]);
+  const x1 = useTransform(scrollYProgress, [0, 0.5, 1], [-30, 0, 20]);
+  const x2 = useTransform(scrollYProgress, [0, 0.5, 1], [40, 0, -30]);
+  const y1 = useTransform(scrollYProgress, [0, 0.5, 1], [-25, 0, 40]);
+  const y2 = useTransform(scrollYProgress, [0, 0.5, 1], [50, 0, -20]);
+  const rotate1 = useTransform(scrollYProgress, [0, 0.5, 1], [12, 0, -4]);
+  const rotate2 = useTransform(scrollYProgress, [0, 0.5, 1], [15, 0, -8]);
   
   const [activeCategory, setActiveCategory] = useState("all");
   
