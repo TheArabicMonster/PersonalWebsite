@@ -147,9 +147,6 @@ export default function AboutSection() {
             </motion.div>
             
             <motion.div 
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.4, delay: 0.2 }}
               style={{ x: x2, y: y1 }}
               className="grid grid-cols-1 sm:grid-cols-2 gap-6 h-full"
             >
