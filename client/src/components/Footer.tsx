@@ -18,6 +18,9 @@ export default function Footer() {
             <p className="mt-2 text-gray-400 max-w-md">
               Créer des expériences numériques significatives grâce à un code propre et une conception réfléchie.
             </p>
+            <p className="text-xs text-gray-500 mt-1">
+              Dernière mise à jour: {new Date().toLocaleDateString('fr-FR')}
+            </p>
           </div>
           
           <div className="flex flex-col sm:flex-row space-y-6 sm:space-y-0 sm:space-x-16">

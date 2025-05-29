@@ -67,7 +67,7 @@ jobs:
           # Install dependencies and restart
           cd /var/www/mateenk.ch
           npm install --omit=dev
-          pm2 restart mateen-portfolio || pm2 start ecosystem.config.js --env production
+          pm2 restart mateen-portfolio || pm2 start index.production.js --name mateen-portfolio
           
           # Reload nginx
           sudo systemctl reload nginx
