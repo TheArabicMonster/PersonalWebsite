@@ -1,0 +1,46 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Build project
+      run: npm run build
+      
+    - name: Deploy to VPS
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: 57.129.65.94
+        username: ubuntu
+        password: ${{ secrets.VPS_PASSWORD }}
+        script: |
+          cd /var/www/mateenk.ch
+          git pull origin main
+          npm install --omit=dev
+          npm run build
+          pm2 restart mateen-portfolio
+          echo "✅ Deployment completed!"
+          
+    - name: Notify deployment status
+      run: |
+        echo "🚀 Deployment completed successfully!"
+        echo "🌐 Site updated at: http://57.129.65.94"
