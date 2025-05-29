@@ -19,7 +19,7 @@ export default function Footer() {
               Créer des expériences numériques significatives grâce à un code propre et une conception réfléchie.
             </p>
             <p className="text-xs text-gray-500 mt-1">
-              Dernière mise à jour: {new Date().toLocaleDateString('fr-FR')}
+              Dernière mise à jour: {new Date().toLocaleDateString('fr-FR')} à {new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
             </p>
           </div>
           
