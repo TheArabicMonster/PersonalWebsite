@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
-import { useLanguage } from "../contexts/LanguageContext";
 import { Loader2, Copy, Check } from "lucide-react";
 import { useToast } from "../hooks/use-toast";
 
@@ -14,101 +13,94 @@ export default function WelcomeGenerator() {
   const [showMessage, setShowMessage] = useState<boolean>(false);
   const [copied, setCopied] = useState<boolean>(false);
   const { toast } = useToast();
-  const { language } = useLanguage();
 
-  // Simulated predefined messages in different languages
-  const predefinedMessages = {
-    en: [
-      "Welcome, [name]! I see you're interested in [interest]. Let's explore how my projects and skills align with your interests.",
-      "Hello [name]! Thanks for visiting my portfolio. I notice you're passionate about [interest]. I have some related projects you might like.",
-      "Great to meet you, [name]! Your interest in [interest] shows good taste. Feel free to check out my work in this area.",
-      "Welcome aboard, [name]! As a fellow [interest] enthusiast, I think you'll find my portfolio showcases relevant skills and projects."
-    ],
-    fr: [
-      "Bienvenue, [name] ! Je vois que vous êtes intéressé(e) par [interest]. Explorons comment mes projets et compétences correspondent à vos intérêts.",
-      "Bonjour [name] ! Merci de visiter mon portfolio. Je remarque que vous êtes passionné(e) par [interest]. J'ai quelques projets connexes qui pourraient vous plaire.",
-      "Ravi de vous rencontrer, [name] ! Votre intérêt pour [interest] montre votre bon goût. N'hésitez pas à consulter mon travail dans ce domaine.",
-      "Bienvenue à bord, [name] ! En tant que passionné(e) de [interest], je pense que vous trouverez que mon portfolio met en valeur des compétences et des projets pertinents."
-    ],
-    ar: [
-      "مرحبًا، [name]! أرى أنك مهتم بـ [interest]. دعنا نستكشف كيف تتوافق مشاريعي ومهاراتي مع اهتماماتك.",
-      "مرحبًا [name]! شكرًا لزيارة محفظتي. ألاحظ أنك شغوف بـ [interest]. لدي بعض المشاريع ذات الصلة التي قد تعجبك.",
-      "سعيد بلقائك، [name]! اهتمامك بـ [interest] يدل على ذوقك الجيد. لا تتردد في الاطلاع على عملي في هذا المجال.",
-      "أهلاً بك، [name]! بصفتك متحمسًا لـ [interest]، أعتقد أنك ستجد أن محفظتي تعرض المهارات والمشاريع ذات الصلة."
-    ]
-  };
+  // Messages prédéfinis en français
+  const predefinedMessages = [
+    "Bienvenue, [name] ! Je vois que vous êtes intéressé(e) par [interest]. Explorons comment mes projets et compétences correspondent à vos intérêts.",
+    "Bonjour [name] ! Merci de visiter mon portfolio. Je remarque que vous êtes passionné(e) par [interest]. J'ai quelques projets connexes qui pourraient vous plaire.",
+    "Ravi de vous rencontrer, [name] ! Votre intérêt pour [interest] montre votre bon goût. N'hésitez pas à consulter mon travail dans ce domaine.",
+    "Bienvenue à bord, [name] ! En tant que passionné(e) de [interest], je pense que vous trouverez que mon portfolio met en valeur des compétences et des projets pertinents."
+  ];
 
-  const generateWelcomeMessage = () => {
-    if (!name || !interest) return;
-    
+  const generateWelcomeMessage = async () => {
     setLoading(true);
     
-    // Simulate API call delay
-    setTimeout(() => {
-      // Select a random message from the predefined list based on current language
-      const messages = predefinedMessages[language as keyof typeof predefinedMessages] || predefinedMessages.en;
-      const randomIndex = Math.floor(Math.random() * messages.length);
-      let selectedMessage = messages[randomIndex];
+    try {
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      // Get random predefined message
+      const randomMessage = predefinedMessages[Math.floor(Math.random() * predefinedMessages.length)];
       
       // Replace placeholders with actual values
-      selectedMessage = selectedMessage
-        .replace('[name]', name)
-        .replace('[interest]', interest);
+      const personalizedMessage = randomMessage
+        .replace(/\[name\]/g, name)
+        .replace(/\[interest\]/g, interest);
       
-      setMessage(selectedMessage);
+      setMessage(personalizedMessage);
       setShowMessage(true);
+      
+      toast({
+        title: "Message généré avec succès !",
+        description: "Votre message de bienvenue personnalisé est prêt.",
+      });
+      
+    } catch (error) {
+      toast({
+        title: "Erreur de génération",
+        description: "Une erreur s'est produite lors de la génération du message.",
+        variant: "destructive"
+      });
+    } finally {
       setLoading(false);
-    }, 1500);
+    }
   };
 
   const resetForm = () => {
     setName("");
     setInterest("");
-    setShowMessage(false);
     setMessage("");
+    setShowMessage(false);
     setCopied(false);
   };
-  
+
   const copyToClipboard = async () => {
     try {
       await navigator.clipboard.writeText(message);
       setCopied(true);
       
-      // Show toast notification
       toast({
-        title: "Générateur de message de bienvenue",
-        description: "Message copié dans le presse-papiers!"
+        title: "Message copié !",
+        description: "Le message a été copié dans le presse-papiers.",
       });
       
-      // Reset copy icon after 2 seconds
-      setTimeout(() => {
-        setCopied(false);
-      }, 2000);
-    } catch (err) {
-      console.error("Failed to copy message: ", err);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (error) {
       toast({
-        title: "Générateur de message de bienvenue",
-        description: "Échec de la copie du message",
-        variant: "destructive",
+        title: "Erreur de copie",
+        description: "Impossible de copier le message dans le presse-papiers.",
+        variant: "destructive"
       });
     }
   };
 
   return (
-    <Card className="w-full max-w-xl mx-auto shadow-lg">
+    <Card className="w-full max-w-2xl mx-auto bg-white/60 dark:bg-background/40 backdrop-blur-md border border-white/30 dark:border-gray-800/50">
       <CardHeader>
-        <CardTitle className="text-primary text-2xl">Générateur de message de bienvenue</CardTitle>
-        <CardDescription>Obtenez un message de bienvenue personnalisé basé sur votre nom et vos intérêts.</CardDescription>
+        <CardTitle className="text-2xl text-center">
+          Générateur de Message de Bienvenue
+        </CardTitle>
+        <CardDescription className="text-center">
+          Obtenez un message de bienvenue personnalisé basé sur votre nom et vos intérêts.
+        </CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="space-y-4">
         {!showMessage ? (
           <div className="space-y-4">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium mb-1">
-                Votre Nom
-              </label>
+              <label className="text-sm font-medium">Votre Nom</label>
               <Input
-                id="name"
+                type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Entrez votre nom"
@@ -116,11 +108,9 @@ export default function WelcomeGenerator() {
               />
             </div>
             <div>
-              <label htmlFor="interest" className="block text-sm font-medium mb-1">
-                Votre Centre d'Intérêt
-              </label>
+              <label className="text-sm font-medium">Votre Centre d'Intérêt</label>
               <Input
-                id="interest"
+                type="text"
                 value={interest}
                 onChange={(e) => setInterest(e.target.value)}
                 placeholder="Ex: Développement Web, IA, Design..."
@@ -150,15 +140,12 @@ export default function WelcomeGenerator() {
               Réessayer
             </Button>
             <Button 
-              className="flex-1" 
               onClick={copyToClipboard}
+              className="flex-1"
+              disabled={copied}
             >
-              {copied ? (
-                <Check className="mr-2 h-4 w-4" />
-              ) : (
-                <Copy className="mr-2 h-4 w-4" />
-              )}
-              Copier le Message
+              {copied ? <Check className="mr-2 h-4 w-4" /> : <Copy className="mr-2 h-4 w-4" />}
+              {copied ? "Copié !" : "Copier le Message"}
             </Button>
           </div>
         )}

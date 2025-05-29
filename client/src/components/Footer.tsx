@@ -1,22 +1,8 @@
 import { navItems, socialLinks } from "../lib/constants";
-import { useLanguage } from "../contexts/LanguageContext";
 import { Github, Linkedin, Twitter, Dribbble } from "lucide-react";
 
 export default function Footer() {
-  const { t, language } = useLanguage();
   const currentYear = new Date().getFullYear();
-  
-  // Get the correct label based on the current language
-  const getNavLabel = (item: typeof navItems[0]) => {
-    switch (language) {
-      case "fr":
-        return item.labelFr;
-      case "ar":
-        return item.labelAr;
-      default:
-        return item.label;
-    }
-  };
 
   return (
     <footer className="bg-gray-900 text-white py-12">
@@ -30,13 +16,13 @@ export default function Footer() {
               <span className="font-mono">Mateen</span>
             </a>
             <p className="mt-2 text-gray-400 max-w-md">
-              {t('footer.description')}
+              Créer des expériences numériques significatives grâce à un code propre et une conception réfléchie.
             </p>
           </div>
           
           <div className="flex flex-col sm:flex-row space-y-6 sm:space-y-0 sm:space-x-16">
             <div>
-              <h4 className="text-lg font-bold mb-4">{t('footer.navigation')}</h4>
+              <h4 className="text-lg font-bold mb-4">Navigation</h4>
               <ul className="space-y-2">
                 {navItems.map((item) => (
                   <li key={item.id}>
@@ -44,7 +30,7 @@ export default function Footer() {
                       href={`#${item.id}`}
                       className="text-gray-400 hover:text-primary transition-colors"
                     >
-                      {getNavLabel(item)}
+                      {item.label}
                     </a>
                   </li>
                 ))}
@@ -52,7 +38,7 @@ export default function Footer() {
             </div>
             
             <div>
-              <h4 className="text-lg font-bold mb-4">{t('footer.social')}</h4>
+              <h4 className="text-lg font-bold mb-4">Social</h4>
               <ul className="space-y-2">
                 <li>
                   <a
@@ -101,15 +87,15 @@ export default function Footer() {
         
         <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row md:justify-between md:items-center">
           <p className="text-gray-500">
-            &copy; {currentYear} Mateen. {t('footer.copyright')}
+            &copy; {currentYear} Mateen. Tous droits réservés.
           </p>
           
           <div className="mt-4 md:mt-0">
             <a href="#" className="text-gray-500 hover:text-primary mr-4 transition-colors">
-              {t('footer.privacy')}
+              Politique de confidentialité
             </a>
             <a href="#" className="text-gray-500 hover:text-primary transition-colors">
-              {t('footer.terms')}
+              Conditions d'utilisation
             </a>
           </div>
         </div>

@@ -2,55 +2,30 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Moon, Sun } from "lucide-react";
 import { useToast } from "../hooks/use-toast";
-import { useLanguage } from "../contexts/LanguageContext";
+import { useTheme } from "../contexts/ThemeContext";
 
 interface ThemeToggleProps {
   className?: string;
 }
 
 export default function ThemeToggle({ className }: ThemeToggleProps) {
-  // Determine initial theme
-  const [currentTheme, setCurrentTheme] = useState<"light" | "dark">("light");
+  const { theme, toggleTheme } = useTheme();
   const { toast } = useToast();
+  const [mounted, setMounted] = useState(false);
 
-  // Initialize theme on component mount
   useEffect(() => {
-    // Check for localStorage theme
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark" || savedTheme === "light") {
-      setCurrentTheme(savedTheme as "light" | "dark");
-      applyTheme(savedTheme as "light" | "dark");
-    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      setCurrentTheme("dark");
-      applyTheme("dark");
-    }
+    setMounted(true);
   }, []);
 
-  // Function to apply theme changes to the DOM
-  const applyTheme = (theme: "light" | "dark") => {
-    const htmlElement = document.documentElement;
-    
-    if (theme === "dark") {
-      htmlElement.classList.add("dark");
-      htmlElement.style.colorScheme = "dark";
-      htmlElement.dataset.theme = "dark";
-    } else {
-      htmlElement.classList.remove("dark");
-      htmlElement.style.colorScheme = "light";
-      htmlElement.dataset.theme = "light";
-    }
-    
-    // Save in localStorage
-    localStorage.setItem("theme", theme);
-  };
+  if (!mounted) {
+    return null;
+  }
 
   const handleToggleTheme = () => {
-    // Toggle theme
-    const newTheme = currentTheme === "light" ? "dark" : "light";
-    setCurrentTheme(newTheme);
-    applyTheme(newTheme);
+    toggleTheme();
     
     // Message en français
+    const newTheme = theme === "light" ? "dark" : "light";
     const message = newTheme === "dark" ? "Thème sombre activé" : "Thème clair activé";
     
     // Show toast notification
@@ -69,7 +44,7 @@ export default function ThemeToggle({ className }: ThemeToggleProps) {
       onClick={handleToggleTheme}
       className={`${className} transition-all duration-200 hover:bg-primary/10 hover:text-primary`}
     >
-      {currentTheme === "dark" ? (
+      {theme === "dark" ? (
         <Sun className="h-5 w-5" />
       ) : (
         <Moon className="h-5 w-5" />

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 import { socialLinks, contactInfo } from "../lib/constants";
 import { motion } from "framer-motion";
@@ -6,7 +5,6 @@ import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { RectangleEllipsis, Phone, MapPin, Github, Linkedin, Twitter, Dribbble, Loader2 } from "lucide-react";
-import { insertContactMessageSchema } from "@shared/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -22,6 +20,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "../contexts/ThemeContext";
+
+// Schema de validation local (plus besoin de shared/schema)
 const formSchema = z.object({
   name: z.string().min(2, {
     message: "Le nom doit contenir au moins 2 caractères."

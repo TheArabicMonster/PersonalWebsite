@@ -44,12 +44,11 @@ export default function AboutSection() {
   };
   
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: { /* No longer controls opacity directly */ },
     visible: {
-      opacity: 1,
       transition: {
-        delayChildren: 0.3,
-        staggerChildren: 0.2
+        delayChildren: 0.3, 
+        staggerChildren: 0.2 
       }
     }
   };
