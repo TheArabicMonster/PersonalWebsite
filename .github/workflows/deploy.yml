@@ -26,7 +26,7 @@ jobs:
       
     - name: Create deployment archive
       run: |
-        tar -czf deployment.tar.gz dist/ ecosystem.config.js package.json .env.production
+        tar -czf deployment.tar.gz dist/ ecosystem.config.js package.json .env.production nginx-config
         
     - name: Upload and deploy to VPS
       uses: appleboy/scp-action@v0.1.7
@@ -57,13 +57,23 @@ jobs:
           sudo cp .env.production /var/www/mateenk.ch/.env
           sudo chown -R ubuntu:ubuntu /var/www/mateenk.ch/
           
+          # Update nginx configuration
+          sudo cp nginx-config /etc/nginx/sites-available/mateenk.ch
+          sudo ln -sf /etc/nginx/sites-available/mateenk.ch /etc/nginx/sites-enabled/mateenk.ch
+          
+          # Test nginx configuration
+          sudo nginx -t
+          
           # Install dependencies and restart
           cd /var/www/mateenk.ch
           npm install --omit=dev
           pm2 restart mateen-portfolio || pm2 start ecosystem.config.js --env production
           
+          # Reload nginx
+          sudo systemctl reload nginx
+          
           # Cleanup
           rm -f /tmp/deployment.tar.gz
           
           echo "✅ Deployment completed!"
-          echo "🌐 Site updated at: http://57.129.65.94"
+          echo "🌐 Site updated at: https://mateenk.ch"
