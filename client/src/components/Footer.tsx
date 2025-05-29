@@ -3,6 +3,8 @@ import { Github, Linkedin, Twitter, Dribbble } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const buildTime = import.meta.env.VITE_BUILD_TIME || new Date().toISOString();
+  const buildDate = new Date(buildTime);
 
   return (
     <footer className="bg-gray-900 text-white py-12">
@@ -19,7 +21,7 @@ export default function Footer() {
               Créer des expériences numériques significatives grâce à un code propre et une conception réfléchie.
             </p>
             <p className="text-xs text-gray-500 mt-1">
-              Dernière mise à jour: {new Date().toLocaleDateString('fr-FR')} à {new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
+              Dernière mise à jour: {buildDate.toLocaleDateString('fr-FR')} à {buildDate.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
             </p>
           </div>
           

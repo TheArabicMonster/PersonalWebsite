@@ -6,6 +6,9 @@ import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 import viteCompression from 'vite-plugin-compression';
 
 export default defineConfig({
+  define: {
+    'import.meta.env.VITE_BUILD_TIME': JSON.stringify(new Date().toISOString()),
+  },
   plugins: [
     viteCompression({
       algorithm: 'brotliCompress',
