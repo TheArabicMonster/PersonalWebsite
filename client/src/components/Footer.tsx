@@ -1,10 +1,30 @@
 import { navItems, socialLinks } from "../lib/constants";
 import { Github, Linkedin, Twitter, Dribbble } from "lucide-react";
+import { useState, useEffect } from "react";
+
+interface BuildInfo {
+  buildTime: string;
+  commit?: string;
+}
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  const buildTime = import.meta.env.VITE_BUILD_TIME || new Date().toISOString();
-  const buildDate = new Date(buildTime);
+  const [buildInfo, setBuildInfo] = useState<BuildInfo | null>(null);
+
+  useEffect(() => {
+    // Récupérer les infos de build depuis le fichier généré par GitHub Actions
+    fetch('/build-info.json')
+      .then(res => res.json())
+      .then(setBuildInfo)
+      .catch(() => {
+        // Fallback vers la variable Vite en cas d'erreur
+        setBuildInfo({ 
+          buildTime: import.meta.env.VITE_BUILD_TIME || new Date().toISOString() 
+        });
+      });
+  }, []);
+
+  const buildDate = buildInfo ? new Date(buildInfo.buildTime) : new Date();
 
   return (
     <footer className="bg-gray-900 text-white py-12">
@@ -22,6 +42,11 @@ export default function Footer() {
             </p>
             <p className="text-xs text-gray-500 mt-1">
               Dernière mise à jour: {buildDate.toLocaleDateString('fr-FR')} à {buildDate.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
+              {buildInfo?.commit && (
+                <span className="ml-2 opacity-70">
+                  (#{buildInfo.commit.substring(0, 7)})
+                </span>
+              )}
             </p>
           </div>
           
