@@ -26,6 +26,16 @@ jobs:
       
     - name: Create deployment archive
       run: |
+        # Créer le .env.production avec les secrets GitHub
+        echo "NODE_ENV=production" > .env.production
+        echo "PORT=5000" >> .env.production
+        echo "EMAIL_HOST=${{ secrets.EMAIL_HOST }}" >> .env.production
+        echo "EMAIL_PORT=${{ secrets.EMAIL_PORT }}" >> .env.production
+        echo "EMAIL_SECURE=${{ secrets.EMAIL_SECURE }}" >> .env.production
+        echo "EMAIL_USER=${{ secrets.EMAIL_USER }}" >> .env.production
+        echo "EMAIL_PASSWORD=${{ secrets.EMAIL_PASSWORD }}" >> .env.production
+        echo "EMAIL_TO=${{ secrets.EMAIL_TO }}" >> .env.production
+        
         tar -czf deployment.tar.gz dist/ ecosystem.config.js package.json .env.production nginx-config
         
     - name: Upload and deploy to VPS
