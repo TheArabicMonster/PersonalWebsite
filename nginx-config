@@ -11,9 +11,9 @@ server {
     http2 on;
     server_name mateenk.ch www.mateenk.ch;
     
-    # Certificats SSL (Let's Encrypt) - commentés pour l'instant
-    # ssl_certificate /etc/letsencrypt/live/mateenk.ch/fullchain.pem;
-    # ssl_certificate_key /etc/letsencrypt/live/mateenk.ch/privkey.pem;
+    # Certificats SSL (Let's Encrypt)
+    ssl_certificate /etc/letsencrypt/live/mateenk.ch/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/mateenk.ch/privkey.pem;
     ssl_protocols TLSv1.2 TLSv1.3;
     ssl_ciphers ECDHE-RSA-AES256-GCM-SHA512:DHE-RSA-AES256-GCM-SHA512:ECDHE-RSA-AES256-GCM-SHA384;
     ssl_prefer_server_ciphers off;
